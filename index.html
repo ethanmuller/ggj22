@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
   </head>
   <body>
     <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
@@ -39,7 +40,7 @@
       </a-assets>
       <a-entity
         position="-40 20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true"
+        animation="property: rotation; to: 0 360 0; dur: 5000; easing: easeInOutCubic; loop: true"
       >
         <a-entity
           gltf-model="#rabbit"
@@ -49,7 +50,7 @@
       </a-entity>
       <a-entity
         position="0 30 -100"
-        animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true"
+        animation="property: rotation; to: 0 360 0; dur: 5000; easing: easeInOutCubic; loop: true"
       >
         <a-entity
           gltf-model="#oldman"
@@ -59,7 +60,7 @@
       </a-entity>
       <a-entity
         position="-40 -20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 2000; easing: ease; loop: true"
+        animation="property: rotation; to: 0 360 0; dur: 5000; easing: easeInOutCubic; loop: true"
       >
         <a-entity
           gltf-model="#turnip"
@@ -69,7 +70,7 @@
       </a-entity>
       <a-entity
         position="40 20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true"
+        animation="property: rotation; to: 0 360 0; dur: 5000; easing: easeInOutCubic; loop: true"
       >
         <a-entity
           gltf-model="#mouse"
@@ -79,7 +80,7 @@
       </a-entity>
       <a-entity
         position="0 -20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true"
+        animation="property: rotation; to: 0 360 0; dur: 5000; easing: easeInOutCubic; loop: true"
       >
         <a-entity
           gltf-model="#krampus"
@@ -89,15 +90,16 @@
       </a-entity>
       <a-entity
         position="40 -20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true"
+        animation="property: rotation; to: 0 360 0; dur: 5000; easing: easeInOutCubic; loop: true"
       >
         <a-entity
+                  wireframe
           gltf-model="#reindeer"
           position="0 0 -20"
           scale="0.25 0.25 0.25"
         ></a-entity>
       </a-entity>
-
+<a-entity light="type: directional; color: #F00; intensity: 0.6" position="-0.5 1 1"></a-entity>
       <a-camera scale="1 1 1"></a-camera>
       <a-sky color="#000"></a-sky>
     </a-scene>
