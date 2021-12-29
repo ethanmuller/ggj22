@@ -7,14 +7,57 @@
     <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
     <a-scene>
       <a-assets>
+        
         <a-asset-item
-          id="tree"
+          id="rabbit"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/bunny.glb?v=1640813395627"
+        ></a-asset-item>
+        
+        <a-asset-item
+          id="oldman"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/oldman.glb?v=1640813402522"
+        ></a-asset-item>
+        
+        <a-asset-item
+          id="turnip"
           src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/raddish.fbx.glb?v=1640739064612"
         ></a-asset-item>
+        
+        <a-asset-item
+          id="mouse"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/mouse.glb?v=1640813397724"
+        ></a-asset-item>
+        
+        <a-asset-item
+          id="krampus"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/krampus.glb?v=1640813401088"
+        ></a-asset-item>
+        
+        <a-asset-item
+          id="reindeer"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/reindeer.glb?v=1640813404007"
+        ></a-asset-item>
+        
       </a-assets>
-<a-entity position="0 0 -100" animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true">
+<a-entity position="-30 0 -100" animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true">
       <a-entity
-        gltf-model="#tree"
+        gltf-model="#turnip"
+        material="color: red; shader: flat" 
+        position="0 0 -20"
+        scale="0.25 0.25 0.5"
+      ></a-entity>
+  </a-entity>
+<a-entity position="0 30 -100" animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true">
+      <a-entity
+        gltf-model="#oldman"
+        material="color: red; shader: flat" 
+        position="0 0 -20"
+        scale="0.25 0.25 0.5"
+      ></a-entity>
+  </a-entity>
+<a-entity position="30 0 -100" animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true">
+      <a-entity
+        gltf-model="#reindeer"
         material="color: red; shader: flat" 
         position="0 0 -20"
         scale="0.25 0.25 0.5"
