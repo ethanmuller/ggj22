@@ -8,7 +8,8 @@
     <script>
       AFRAME.registerComponent("hello-world", {
         tick: function () {
-          this.el.setAttribute('value', Date.now())
+          const now = new Date(Date.now())
+          this.el.setAttribute('value', `(${now.toLocaleDateString('en-US', { weekday: 'long' })}) ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}`)
         },
       });
     </script>
