@@ -7,9 +7,8 @@
   <body>
     <script>
       AFRAME.registerComponent("hello-world", {
-        init: function () {
-          this.el.value = 4;
-          console.log(this.el)
+        tick: function () {
+          this.el.setAttribute('value', Date.now())
         },
       });
     </script>
@@ -120,7 +119,10 @@
         <a-text
           position="0.125 0.2 -10"
           hello-world
+                scale="1 1 1"
           value="Hello, World!"
+                font="sourcecodepro"
+                color="#fff"
         ></a-text>
       </a-camera>
       <a-sky color="#00f"></a-sky>
