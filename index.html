@@ -12,6 +12,19 @@
           this.el.setAttribute('value', `(${now.toLocaleDateString('en-US', { weekday: 'long' })}) ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}`)
         },
       });
+      
+      AFRAME.registerComponent('camera-listener', {
+        tick: function () {
+        var cameraEl = this.el.sceneEl.camera.el;
+        cameraEl.getAttribute('position');
+          debugger
+        cameraEl.getAttribute('rotation');
+        this.el.setAttribute('value', cameraEl.getAttribute('position'))
+
+
+    // Do something.
+  }
+});
     </script>
     <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
     <a-scene>
@@ -119,7 +132,7 @@
         <a-plane scale="1 0.1 1" position="0 0 -20"></a-plane>
         <a-text
           position="0.125 0.2 -10"
-          hello-world
+          camera-listener
                 scale="1 1 1"
           value="Hello, World!"
                 font="sourcecodepro"
