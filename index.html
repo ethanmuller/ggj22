@@ -2,10 +2,17 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-      <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
-
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
   </head>
   <body>
+    <script>
+      AFRAME.registerComponent("hello-world", {
+        init: function () {
+          this.el.value = 4;
+          console.log(this.el)
+        },
+      });
+    </script>
     <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
     <a-scene>
       <a-assets>
@@ -99,12 +106,22 @@
           scale="0.25 0.25 0.25"
         ></a-entity>
       </a-entity>
-    <a-entity light="type: directional; color: #fff; intensity: .9" position="-3 10  5"></a-entity>
-<a-entity light="type: ambient; color: #dbb; intensity: 0.7" position="3 2 5"></a-entity>
+      <a-entity
+        light="type: directional; color: #fff; intensity: .9"
+        position="-3 10  5"
+      ></a-entity>
+      <a-entity
+        light="type: ambient; color: #dbb; intensity: 0.7"
+        position="3 2 5"
+      ></a-entity>
       <a-camera scale="1 1 1">
         <a-plane scale="0.1 1 1" position="0 0 -20"></a-plane>
         <a-plane scale="1 0.1 1" position="0 0 -20"></a-plane>
-        <a-text position="0.5 0.5 -10" value="Hello, World!"></a-text>
+        <a-text
+          position="0.125 0.2 -10"
+          hello-world
+          value="Hello, World!"
+        ></a-text>
       </a-camera>
       <a-sky color="#00f"></a-sky>
     </a-scene>
