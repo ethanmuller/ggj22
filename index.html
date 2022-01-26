@@ -8,31 +8,42 @@
     <script>
       AFRAME.registerComponent("hello-world", {
         tick: function () {
-          const now = new Date(Date.now())
-          this.el.setAttribute('value', `${now.getFullYear()}${now.getMonth()}-${now.getDay()}-${now.getDate()} (${now.toLocaleDateString('en-US', { weekday: 'long' })}) ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}`)
+          const now = new Date(Date.now());
+          this.el.setAttribute(
+            "value",
+            `${now.getFullYear()}${now.getMonth()}-${now.getDay()}-${now.getDate()} (${now.toLocaleDateString(
+              "en-US",
+              { weekday: "long" }
+            )}) ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}`
+          );
         },
       });
-      
+
       AFRAME.registerComponent("pulse", {
         tick: function (time, deltaTime) {
-          this.el.setAttribute('position', `0 0 ${Math.sin (time/60*0.1)*100}`)
+          this.el.setAttribute(
+            "position",
+            `0 0 ${Math.sin((time / 60) * 0.1) * 100}`
+          );
           //this.el.setAttribute('scale', `0 0 ${Math.sin (time*0.01)*100}`)
         },
       });
-      
-      AFRAME.registerComponent('camera-listener', {
+
+      AFRAME.registerComponent("camera-listener", {
         tick: function () {
-        var cameraEl = this.el.sceneEl.camera.el;
-        const pos = cameraEl.getAttribute('position');
-        const rot = cameraEl.getAttribute('rotation');
-        this.el.setAttribute('value', `Y: ${rot.x}
+          var cameraEl = this.el.sceneEl.camera.el;
+          const pos = cameraEl.getAttribute("position");
+          const rot = cameraEl.getAttribute("rotation");
+          this.el.setAttribute(
+            "value",
+            `Y: ${rot.x}
         N: ${rot.y}
-        Q: ${rot.z}`)
+        Q: ${rot.z}`
+          );
 
-
-    // Do something.
-  }
-});
+          // Do something.
+        },
+      });
     </script>
     <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
     <a-scene>
@@ -68,67 +79,67 @@
         ></a-asset-item>
       </a-assets>
       <a-entity scale="1 1 1" pulse>
-      <a-entity
-        position="-40 20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 5000; delay: 0; easing: easeInOutCubic; loop: true"
-      >
         <a-entity
-          gltf-model="#rabbit"
-          position="0 0 -20"
-          scale="0.25 0.25 0.5"
-        ></a-entity>
-      </a-entity>
-      <a-entity
-        position="0 30 -100"
-        animation="property: rotation; to: 0 360 0; dur: 5000; delay: 833; easing: easeInOutCubic; loop: true"
-      >
-        <a-entity
-          gltf-model="#oldman"
-          position="0 0 -20"
-          scale="0.25 0.25 0.5"
-        ></a-entity>
-      </a-entity>
-      <a-entity
-        position="40 20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 5000; delay: 1666; easing: easeInOutCubic; loop: true"
-      >
-        <a-entity
-          gltf-model="#mouse"
-          position="0 0 -10"
-          scale="0.25 0.25 0.25"
-        ></a-entity>
-      </a-entity>
-      <a-entity
-        position="-40 -20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 5000; delay: 4165; easing: easeInOutCubic; loop: true"
-      >
-        <a-entity
-          gltf-model="#turnip"
-          position="0 0 -20"
-          scale="0.25 0.25 0.5"
-        ></a-entity>
-      </a-entity>
-      <a-entity
-        position="0 -20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 5000; delay: 3332; easing: easeInOutCubic; loop: true"
-      >
-        <a-entity
-          gltf-model="#krampus"
-          position="0 0 -20"
-          scale="0.25 0.25 0.5"
-        ></a-entity>
-      </a-entity>
-      <a-entity
-        position="40 -20 -100"
-        animation="property: rotation; to: 0 360 0; dur: 5000; delay: 2499; easing: easeInOutCubic; loop: true"
-      >
-        <a-entity
-          gltf-model="#reindeer"
-          position="0 0 -20"
-          scale="0.25 0.25 0.25"
-        ></a-entity>
-      </a-entity>
+          position="-40 20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 0; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#rabbit"
+            position="0 0 -20"
+            scale="0.25 0.25 0.5"
+          ></a-entity>
         </a-entity>
+        <a-entity
+          position="0 30 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 833; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#oldman"
+            position="0 0 -20"
+            scale="0.25 0.25 0.5"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          position="40 20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 1666; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#mouse"
+            position="0 0 -10"
+            scale="0.25 0.25 0.25"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          position="-40 -20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 4165; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#turnip"
+            position="0 0 -20"
+            scale="0.25 0.25 0.5"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          position="0 -20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 3332; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#krampus"
+            position="0 0 -20"
+            scale="0.25 0.25 0.5"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          position="40 -20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 2499; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#reindeer"
+            position="0 0 -20"
+            scale="0.25 0.25 0.25"
+          ></a-entity>
+        </a-entity>
+      </a-entity>
       <a-entity
         light="type: directional; color: #fff; intensity: .9"
         position="-3 10  5"
@@ -137,27 +148,25 @@
         light="type: ambient; color: #dbb; intensity: 0.7"
         position="3 2 5"
       ></a-entity>
-        
+
       <a-camera zoom="0.25">
         <a-plane scale="0.025 1 1" position="0 0 -10"></a-plane>
         <a-plane scale="1 0.025 1" position="0 0 -10"></a-plane>
         <a-text
           position="0.125 0.5 -10"
           camera-listener
-                scale="1 1 1"
+          scale="1 1 1"
           value="Hello, World!"
-                font="sourcecodepro"
-                color="#fff"
+          font="sourcecodepro"
+          color="#fff"
         ></a-text>
         <a-text
-          position="0.125 -0.125 -10
-
-                    "
+          position="0.125 -0.125 -10"
           hello-world
-                scale="1 1 1"
+          scale="1 1 1"
           value="Hello, World!"
-                font="sourcecodepro"
-                color="#fff"
+          font="sourcecodepro"
+          color="#fff"
         ></a-text>
       </a-camera>
       <a-sky color="#00f"></a-sky>
