@@ -3,11 +3,18 @@
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.36/Tone.js"></script>
+    <style>
+      .btn {
+        position: absolute; transform: translate3d(-100%,0,0); z-index: 999; top: 50%; left: 50%;
+      }</style>
   </head>
   <body>
+    <button class="btn">audio</button>
     <script>
       let x = 0;
       let lastY;
+      
       
       function getX() {
         return x;
