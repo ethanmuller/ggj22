@@ -6,75 +6,82 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.36/Tone.js"></script>
     <style>
       .btn {
-        position: absolute; 
-        transform: translate3d(-100%,0,0); 
-        z-index: 999; 
-        top: 50%; 
+        position: absolute;
+        transform: translate3d(-100%, 0, 0);
+        z-index: 999;
+        top: 50%;
         left: 50%;
         margin-top: 1rem;
         margin-left: -1rem;
-        
+
         background: transparent;
         color: white;
         border: 1px solid;
         padding: 1rem 2rem;
-        
       }
     </style>
   </head>
   <body>
-    <button class="btn" id="nz" onclick="ding">NOISE BUTTON</button>
+    <button class="btn" id="boop">BOOP</button>
     <script>
       let x = 0;
       let lastY;
-      
+
       const synth = new Tone.Synth({
         envelope: {
           attack: 0.001,
           decay: 0.001,
           release: 0.0,
-        }
-      })
-      
+        },
+      });
+
       const panner = new Tone.Panner(1).toDestination();
-      
-      synth.connect(panner)
-      
+
+      synth.connect(panner);
+
       const synth2 = new Tone.Synth({
         envelope: {
           attack: 0.001,
           decay: 0.001,
           release: 0.0,
-        }
-      })
-      
-      const panner2 = new Tone.Panner(-1).toDestination();
-      
-      synth2.connect(panner2)
-      
-      const seq = new Tone.Sequence((time, note) => {
-	synth2.triggerAttackRelease(note, 0.01, time);
-	// subdivisions are given as subarrays
-}, ["C5", null]).start(0);
-      Tone.Transport.bpm.value = 60;
-Tone.Transport.start();
+        },
+      });
 
+      const panner2 = new Tone.Panner(-1).toDestination();
+
+      synth2.connect(panner2);
+
+      const seq = new Tone.Sequence(
+        (time, note) => {
+          synth2.triggerAttackRelease(note, 0.01, time);
+        },
+        ["C5", null]
+      );
+
+      function boop(e) {
+        console.log(e.target)
+        Tone.Transport.bpm.value = 60;
+        Tone.Transport.start();
+        seq.start(0);
+      }
       
+      document.getElementById('boop').addEventListener('click', boop)
+
       function ding() {
         synth.triggerAttackRelease("C6", "64n");
       }
-      
+
       function getX() {
         return x;
       }
-      
+
       AFRAME.registerComponent("the-sky", {
         tick: function () {
-          const c = getX() % 2 === 0 ? '#a01' : '#00f'
-          this.el.setAttribute('color', c);
+          const c = getX() % 2 === 0 ? "#a01" : "#00f";
+          this.el.setAttribute("color", c);
         },
       });
-      
+
       AFRAME.registerComponent("timestamp-text", {
         tick: function () {
           const now = new Date(Date.now());
@@ -120,12 +127,12 @@ Tone.Transport.start();
           var cameraEl = this.el.sceneEl.camera.el;
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
-          
+
           if (lastY > 0 && rot.x <= 0) {
-            x += 1
-            ding()
+            x += 1;
+            ding();
           }
-          
+
           lastY = rot.x;
         },
       });
@@ -135,16 +142,16 @@ Tone.Transport.start();
           var cameraEl = this.el.sceneEl.camera.el;
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
-          rot.x *= -1
-          rot.x *= 8
-          
-          rot.y *= -1
-          rot.y *= 4
-          
-          rot.z *= -1
+          rot.x *= -1;
+          rot.x *= 8;
+
+          rot.y *= -1;
+          rot.y *= 4;
+
+          rot.z *= -1;
           //rot.z *= 4
-          
-          this.el.setAttribute('rotation', rot);
+
+          this.el.setAttribute("rotation", rot);
 
           // Do something.
         },
@@ -258,8 +265,15 @@ Tone.Transport.start();
         <a-plane scale="0.025 1 1" position="0 0 -10"></a-plane>
         <a-plane scale="1 0.025 1" position="0 0 -10"></a-plane>
         <a-entity position="-0.5 0.5 -10" cam-track>
-        <a-box scale="0.25 0.25 0.25"></a-box>
-        <a-cone color="tomato" radius-bottom="0.05" radius-top="0.0" height="0.25" position="0 0 0.25" rotation="90 0 0"></a-cone>
+          <a-box scale="0.25 0.25 0.25"></a-box>
+          <a-cone
+            color="tomato"
+            radius-bottom="0.05"
+            radius-top="0.0"
+            height="0.25"
+            position="0 0 0.25"
+            rotation="90 0 0"
+          ></a-cone>
         </a-entity>
         <a-text
           position="0.125 0.125 -10"
@@ -268,7 +282,7 @@ Tone.Transport.start();
           value="Hello, World!"
           font="sourcecodepro"
           color="#fff"
-                baseline="bottom"
+          baseline="bottom"
         ></a-text>
         <a-text
           position="0.125 -0.125 -10"
