@@ -31,9 +31,35 @@
       
       const synth = new Tone.Synth({
         envelope: {
-          release: 0,
+          attack: 0.001,
+          decay: 0.001,
+          release: 0.0,
         }
-      }).toDestination();
+      })
+      
+      const panner = new Tone.Panner(1).toDestination();
+      
+      synth.connect(panner)
+      
+      const synth2 = new Tone.Synth({
+        envelope: {
+          attack: 0.001,
+          decay: 0.001,
+          release: 0.0,
+        }
+      })
+      
+      const panner2 = new Tone.Panner(-1).toDestination();
+      
+      synth2.connect(panner2)
+      
+      const seq = new Tone.Sequence((time, note) => {
+	synth2.triggerAttackRelease(note, 0.01, time);
+	// subdivisions are given as subarrays
+}, ["C5", null]).start(0);
+      Tone.Transport.bpm.value = 60;
+Tone.Transport.start();
+
       
       function ding() {
         synth.triggerAttackRelease("C6", "64n");
