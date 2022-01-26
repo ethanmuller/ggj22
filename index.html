@@ -193,7 +193,7 @@
           src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/reindeer.glb?v=1640813404007"
         ></a-asset-item>
       </a-assets>
-      <a-entity scale="1 1 1" pulse>
+      <a-entity scale="1 1 1" rotation="90 0 0" pulse>
         <a-entity
           position="-40 20 -100"
           animation="property: rotation; to: 0 360 0; dur: 5000; delay: 0; easing: easeInOutCubic; loop: true"
@@ -265,9 +265,11 @@
       ></a-entity>
 
       <a-camera zoom="1" x-counter>
-        <a-plane scale="0.025 1 1" position="0 0 -10"></a-plane>
-        <a-plane scale="1 0.025 1" position="0 0 -10"></a-plane>
-        <a-entity position="-0.5 0.5 -10" cam-track>
+        <a-entity position="0 0 -7">
+        <a-plane scale="0.025 1 1"></a-plane>
+        <a-plane scale="1 0.025 1"></a-plane>
+        </a-entity>
+        <a-entity position="-0.5 0.5 -7" cam-track>
           <a-box scale="0.25 0.25 0.25"></a-box>
           <a-cone
             color="tomato"
@@ -278,23 +280,7 @@
             rotation="90 0 0"
           ></a-cone>
         </a-entity>
-        <a-text
-          position="0.125 0.125 -10"
-          debug-text
-          scale="1 1 1"
-          value="Hello, World!"
-          font="sourcecodepro"
-          color="#fff"
-          baseline="bottom"
-        ></a-text>
-        <a-text
-          position="0.125 -0.125 -10"
-          timestamp-text
-          scale="1 1 1"
-          value="Hello, World!"
-          font="sourcecodepro"
-          color="#fff"
-        ></a-text>
+        
       </a-camera>
       <a-sky the-sky></a-sky>
     </a-scene>
