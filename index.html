@@ -163,9 +163,10 @@
       <a-camera zoom="0.25">
         <a-plane scale="0.025 1 1" position="0 0 -10"></a-plane>
         <a-plane scale="1 0.025 1" position="0 0 -10"></a-plane>
-        <a-entity></a-entity>
-        <a-box position="-0.5 0.5 -10" scale="0.25 0.25 0.25" cam-track></a-box>
-        <a-cone color="tomato" radius-bottom="2" radius-top="0.5"></a-cone>
+        <a-entity position="-0.5 0.5 -10" cam-track>
+        <a-box scale="0.25 0.25 0.25"></a-box>
+        <a-cone color="tomato" radius-bottom="0.125" radius-top="0.0" height="0.1 "></a-cone>
+        </a-entity>
         <a-text
           position="0.125 0.5 -10"
           camera-listener
