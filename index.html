@@ -7,10 +7,20 @@
   <body>
     <script>
       let x = 0;
-      let bgc = '#f00';
       let lastY;
       
-      AFRAME.registerComponent("hello-world", {
+      function getX() {
+        return x;
+      }
+      
+      AFRAME.registerComponent("the-sky", {
+        tick: function () {
+          const c = getX() % 2 === 0 ? '#a01' : '#00f'
+          this.el.setAttribute('color', c);
+        },
+      });
+      
+      AFRAME.registerComponent("timestamp-text", {
         tick: function () {
           const now = new Date(Date.now());
           this.el.setAttribute(
@@ -33,7 +43,7 @@
         },
       });
 
-      AFRAME.registerComponent("camera-listener", {
+      AFRAME.registerComponent("debug-text", {
         tick: function () {
           var cameraEl = this.el.sceneEl.camera.el;
           const pos = cameraEl.getAttribute("position");
@@ -197,7 +207,7 @@
         </a-entity>
         <a-text
           position="0.125 0.125 -10"
-          camera-listener
+          debug-text
           scale="1 1 1"
           value="Hello, World!"
           font="sourcecodepro"
@@ -206,14 +216,14 @@
         ></a-text>
         <a-text
           position="0.125 -0.125 -10"
-          hello-world
+          timestamp-text
           scale="1 1 1"
           value="Hello, World!"
           font="sourcecodepro"
           color="#fff"
         ></a-text>
       </a-camera>
-      <a-sky color =the-sky></a-sky>
+      <a-sky the-sky></a-sky>
     </a-scene>
   </body>
 </html>
