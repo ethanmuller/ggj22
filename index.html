@@ -18,17 +18,26 @@
         color: white;
         border: 1px solid;
         padding: 1rem 2rem;
+        
+        display: none;
       }
     </style>
   </head>
   <body>
-    <button class="btn">NOISE BUTTON</button>
+    <button class="btn" id="nz">NOISE BUTTON</button>
     <script>
       let x = 0;
       let lastY;
       
-      const synth = new Tone.Synth().toDestination();
+      const synth = new Tone.Synth({
+        envelope: {
+          release: 0,
+        }
+      }).toDestination();
       
+      function ding() {
+        synth.triggerAttackRelease("C6", "64n");
+      }
       
       function getX() {
         return x;
@@ -89,7 +98,7 @@
           
           if (lastY > 0 && rot.x <= 0) {
             x += 1
-            synth.triggerAttackRelease("C4", "8n");
+            ding()
           }
           
           lastY = rot.x;
