@@ -6,6 +6,8 @@
   </head>
   <body>
     <script>
+      let lastY;
+      
       AFRAME.registerComponent("hello-world", {
         tick: function () {
           const now = new Date(Date.now());
@@ -42,6 +44,15 @@
           );
 
           // Do something.
+        },
+      });
+
+      AFRAME.registerComponent("x-counter", {
+        tick: function () {
+          var cameraEl = this.el.sceneEl.camera.el;
+          const pos = cameraEl.getAttribute("position");
+          const rot = cameraEl.getAttribute("rotation");
+          
         },
       });
 
@@ -169,7 +180,7 @@
         position="3 2 5"
       ></a-entity>
 
-      <a-camera zoom="1">
+      <a-camera zoom="1" x-counter>
         <a-plane scale="0.025 1 1" position="0 0 -10"></a-plane>
         <a-plane scale="1 0.025 1" position="0 0 -10"></a-plane>
         <a-entity position="-0.5 0.5 -10" cam-track>
