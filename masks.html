@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.36/Tone.js"></script>
+    <style>
+      .btn {
+        position: absolute; 
+        transform: translate3d(-100%,0,0); 
+        z-index: 999; 
+        top: 50%; 
+        left: 50%;
+        margin-top: 1rem;
+        margin-left: -1rem;
+        
+        background: transparent;
+        color: white;
+        border: 1px solid;
+        padding: 1rem 2rem;
+        
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn" id="nz">NOISE BUTTON</button>
+    <script>
+      let x = 0;
+      let lastY;
+      
+      const synth = new Tone.Synth({
+        envelope: {
+          attack: 0.001,
+          decay: 0.001,
+          release: 0.0,
+        }
+      })
+      
+      const panner = new Tone.Panner(1).toDestination();
+      
+      synth.connect(panner)
+      
+      const synth2 = new Tone.Synth({
+        envelope: {
+          attack: 0.001,
+          decay: 0.001,
+          release: 0.0,
+        }
+      })
+      
+      const panner2 = new Tone.Panner(-1).toDestination();
+      
+      synth2.connect(panner2)
+      
+      const seq = new Tone.Sequence((time, note) => {
+	synth2.triggerAttackRelease(note, 0.01, time);
+	// subdivisions are given as subarrays
+}, ["C5", null]).start(0);
+      Tone.Transport.bpm.value = 60;
+Tone.Transport.start();
+
+      
+      function ding() {
+        synth.triggerAttackRelease("C6", "64n");
+      }
+      
+      function getX() {
+        return x;
+      }
+      
+      AFRAME.registerComponent("the-sky", {
+        tick: function () {
+          const c = getX() % 2 === 0 ? '#a01' : '#00f'
+          this.el.setAttribute('color', c);
+        },
+      });
+      
+      AFRAME.registerComponent("timestamp-text", {
+        tick: function () {
+          const now = new Date(Date.now());
+          this.el.setAttribute(
+            "value",
+            `${now.getFullYear()}${now.getMonth()}-${now.getDay()}-${now.getDate()} (${now.toLocaleDateString(
+              "en-US",
+              { weekday: "long" }
+            )}) ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}`
+          );
+        },
+      });
+
+      AFRAME.registerComponent("pulse", {
+        tick: function (time, deltaTime) {
+          // this.el.setAttribute(
+          //   "position",
+          //   `0 0 ${Math.sin((time / 60) * 0.1) * 100}`
+          // );
+          //this.el.setAttribute('scale', `0 0 ${Math.sin (time*0.01)*100}`)
+        },
+      });
+
+      AFRAME.registerComponent("debug-text", {
+        tick: function () {
+          var cameraEl = this.el.sceneEl.camera.el;
+          const pos = cameraEl.getAttribute("position");
+          const rot = cameraEl.getAttribute("rotation");
+          this.el.setAttribute(
+            "value",
+            `Y: ${rot.x}
+        N: ${rot.y}
+        Q: ${rot.z}
+            X: ${x}`
+          );
+
+          // Do something.
+        },
+      });
+
+      AFRAME.registerComponent("x-counter", {
+        tick: function () {
+          var cameraEl = this.el.sceneEl.camera.el;
+          const pos = cameraEl.getAttribute("position");
+          const rot = cameraEl.getAttribute("rotation");
+          
+          if (lastY > 0 && rot.x <= 0) {
+            x += 1
+            ding()
+          }
+          
+          lastY = rot.x;
+        },
+      });
+
+      AFRAME.registerComponent("cam-track", {
+        tick: function () {
+          var cameraEl = this.el.sceneEl.camera.el;
+          const pos = cameraEl.getAttribute("position");
+          const rot = cameraEl.getAttribute("rotation");
+          rot.x *= -1
+          rot.x *= 8
+          
+          rot.y *= -1
+          rot.y *= 4
+          
+          rot.z *= -1
+          //rot.z *= 4
+          
+          this.el.setAttribute('rotation', rot);
+
+          // Do something.
+        },
+      });
+    </script>
+    <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
+    <a-scene>
+      <a-assets>
+        <a-asset-item
+          id="rabbit"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/bunny.glb?v=1640813395627"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="oldman"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/oldman.glb?v=1640813402522"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="turnip"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/raddish.fbx.glb?v=1640739064612"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="mouse"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/mouse.glb?v=1640813397724"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="krampus"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/krampus.glb?v=1640813401088"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="reindeer"
+          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/reindeer.glb?v=1640813404007"
+        ></a-asset-item>
+      </a-assets>
+      <a-entity scale="1 1 1" pulse>
+        <a-entity
+          position="-40 20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 0; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#rabbit"
+            position="0 0 -20"
+            scale="0.25 0.25 0.5"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          position="0 30 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 833; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#oldman"
+            position="0 0 -20"
+            scale="0.25 0.25 0.5"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          position="40 20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 1666; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#mouse"
+            position="0 0 -10"
+            scale="0.25 0.25 0.25"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          position="-40 -20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 4165; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#turnip"
+            position="0 0 -20"
+            scale="0.25 0.25 0.5"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          position="0 -20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 3332; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#krampus"
+            position="0 0 -20"
+            scale="0.25 0.25 0.5"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          position="40 -20 -100"
+          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 2499; easing: easeInOutCubic; loop: true"
+        >
+          <a-entity
+            gltf-model="#reindeer"
+            position="0 0 -20"
+            scale="0.25 0.25 0.25"
+          ></a-entity>
+        </a-entity>
+      </a-entity>
+      <a-entity
+        light="type: directional; color: #fff; intensity: .9"
+        position="-3 10  5"
+      ></a-entity>
+      <a-entity
+        light="type: ambient; color: #dbb; intensity: 0.7"
+        position="3 2 5"
+      ></a-entity>
+
+      <a-camera zoom="1" x-counter>
+        <a-plane scale="0.025 1 1" position="0 0 -10"></a-plane>
+        <a-plane scale="1 0.025 1" position="0 0 -10"></a-plane>
+        <a-entity position="-0.5 0.5 -10" cam-track>
+        <a-box scale="0.25 0.25 0.25"></a-box>
+        <a-cone color="tomato" radius-bottom="0.05" radius-top="0.0" height="0.25" position="0 0 0.25" rotation="90 0 0"></a-cone>
+        </a-entity>
+        <a-text
+          position="0.125 0.125 -10"
+          debug-text
+          scale="1 1 1"
+          value="Hello, World!"
+          font="sourcecodepro"
+          color="#fff"
+                baseline="bottom"
+        ></a-text>
+        <a-text
+          position="0.125 -0.125 -10"
+          timestamp-text
+          scale="1 1 1"
+          value="Hello, World!"
+          font="sourcecodepro"
+          color="#fff"
+        ></a-text>
+      </a-camera>
+      <a-sky the-sky></a-sky>
+    </a-scene>
+  </body>
+</html>
