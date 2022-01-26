@@ -15,7 +15,7 @@
       
       AFRAME.registerComponent("pulse", {
         tick: function (time, deltaTime) {
-          this.el.setAttribute('position', `0 0 ${Math.sin (time*0.01)*100}`)
+          this.el.setAttribute('position', `0 0 ${Math.sin (time/60/2)*100}`)
           //this.el.setAttribute('scale', `0 0 ${Math.sin (time*0.01)*100}`)
         },
       });
