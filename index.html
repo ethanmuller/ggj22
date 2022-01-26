@@ -50,6 +50,12 @@
           var cameraEl = this.el.sceneEl.camera.el;
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
+          rot.x *= -1
+          rot.x *= 4
+          
+          rot.y *= -1
+          rot.y *= 4
+          
           this.el.setAttribute('rotation', rot);
 
           // Do something.
@@ -165,7 +171,7 @@
         <a-plane scale="1 0.025 1" position="0 0 -10"></a-plane>
         <a-entity position="-0.5 0.5 -10" cam-track>
         <a-box scale="0.25 0.25 0.25"></a-box>
-        <a-cone color="tomato" radius-bottom="0.125" radius-top="0.0" height="0.1 "></a-cone>
+        <a-cone color="tomato" radius-bottom="0.125" radius-top="0.0" height="0.125" position="0 0 0.5" rotation="90 0 0"></a-cone>
         </a-entity>
         <a-text
           position="0.125 0.5 -10"
