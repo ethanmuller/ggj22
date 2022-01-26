@@ -22,10 +22,11 @@
     </style>
   </head>
   <body>
-    <button class="btn" id="boop">BOOP</button>
+    <button class="btn" id="boop">BOOP 👂</button>
     <script>
       let x = 0;
       let lastY;
+      let boopin = false
 
       const synth = new Tone.Synth({
         envelope: {
@@ -59,7 +60,8 @@
       );
 
       function boop(e) {
-        console.log(e.target)
+        boopin = true
+        e.target.hidden = true
         Tone.Transport.bpm.value = 60;
         Tone.Transport.start();
         seq.start(0);
@@ -68,6 +70,7 @@
       document.getElementById('boop').addEventListener('click', boop)
 
       function ding() {
+        if (!boopin) return
         synth.triggerAttackRelease("C6", "64n");
       }
 
