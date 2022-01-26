@@ -44,6 +44,17 @@
           // Do something.
         },
       });
+
+      AFRAME.registerComponent("cam-track", {
+        tick: function () {
+          var cameraEl = this.el.sceneEl.camera.el;
+          const pos = cameraEl.getAttribute("position");
+          const rot = cameraEl.getAttribute("rotation");
+          this.el.setAttribute('rotation', rot);
+
+          // Do something.
+        },
+      });
     </script>
     <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
     <a-scene>
@@ -152,6 +163,8 @@
       <a-camera zoom="0.25">
         <a-plane scale="0.025 1 1" position="0 0 -10"></a-plane>
         <a-plane scale="1 0.025 1" position="0 0 -10"></a-plane>
+        <a-box position="-0.5 0.5 -10" scale="0.25 0.25 0.25" cam-track></a-box>
+        <a-cone color="tomato" radius-bottom="2" radius-top="0.5"></a-cone>
         <a-text
           position="0.125 0.5 -10"
           camera-listener
