@@ -1,0 +1,49 @@
+thu 27
+wed 26 <---- TODAY
+https://ggj22.glitch.me/
+
+today i'm going to track if somebody is nodding
+so i need to have a tonejs metronome
+but first i will
+
+input phase 1 was a success!: count up when crossing horizon threshold downwards
+        store a lastY value
+        if it was above 0 but now below 0, change bgc
+                increment X
+overshot a little, but that's okay
+
+audio phase 1 goal: tone js metronome ding pan left, ding on shift pan right
+starting 2:45pm
+overshot to 3:38
+should just do hour blocks instead, easier to estimate
+success!
+
+next: visualize tonejs
+        spheres in grid
+
+tue 25
+got a scene
+it's printing the time
+going to try and get camera position next
+got it!
+https://nice-repeated-bard.glitch.me/
+
+
+gaemz
+nomi
+ivan
+horatiou
+
+vr is cool because you can make locations
+and experiences in locations
+will events in vr be more memorable?
+
+so i'm gonna need to
+get camera position
+look at it over time
+render position in corner of view
+maybe as text and as an object
+
+you can't add angles as vectors
+
+4d vj http://for
