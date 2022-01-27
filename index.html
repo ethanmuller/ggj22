@@ -36,7 +36,7 @@
         },
       });
 
-      const panner = new Tone.Panner(1).toDestination();
+      const panner = new Tone.Panner(0.5).toDestination();
 
       synth.connect(panner);
 
@@ -48,7 +48,7 @@
         },
       });
 
-      const panner2 = new Tone.Panner(-1).toDestination();
+      const panner2 = new Tone.Panner(-0.5).toDestination();
 
       synth2.connect(panner2);
 
