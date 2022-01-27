@@ -7,10 +7,9 @@
     <style>
       .btn {
         position: absolute;
-        transform: translate3d(-100%, 0, 0);
         z-index: 999;
-        top: 50%;
-        left: 50%;
+        bottom: 5rem;
+        right: 1.5rem;
         margin-top: 1rem;
         margin-left: -1rem;
 
@@ -22,7 +21,8 @@
     </style>
   </head>
   <body>
-    <button class="btn" id="boop">BOOP 👂</button>
+    <button class="btn" id="boop">ACTIVATE SOUND 👂</button>
+    <button class="btn" id="boop" hidden="true">DEACTIVATE SOUND 🙅👂</button>
     <script>
       let x = 0;
       let lastY;
@@ -94,6 +94,14 @@
       function getX() {
         return x;
       }
+
+      AFRAME.registerComponent("marker", {
+        tick: function () {
+          var cameraEl = this.el.sceneEl.camera.el;
+          const rot = cameraEl.getAttribute("rotation");
+          this.el.setAttribute('visible', false)
+        },
+      });
 
       AFRAME.registerComponent("the-sky", {
         tick: function () {
@@ -286,8 +294,7 @@
 
       <a-camera zoom="1" x-counter>
         <a-entity position="0 0 -7">
-        <a-plane scale="0.025 1 1"></a-plane>
-        <a-plane scale="1 0.025 1"></a-plane>
+        <a-plane marker scale="1 0.025 1" color="yellow"></a-plane>
                    
           <a-text
           position="0.125 -1 0"
