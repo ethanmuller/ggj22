@@ -328,13 +328,20 @@
         light="type: ambient; color: #dbb; intensity: 0.7"
         position="3 2 5"
       ></a-entity>
+          <a-sphere color="#fff" radius="0.125" position="0 0.25 -20" material="shader: flat" beat-light-1></a-sphere>
+          <a-sphere color="#fff" radius="0.125" position="0 -0.25 -20" material="shader: flat" beat-light-2></a-sphere>
+          <a-sphere color="#fff" radius="0.125" position="0 0.25 -20" material="shader: flat" beat-light-1></a-sphere>
+          <a-sphere color="#fff" radius="0.125" position="0 -0.25 -20" material="shader: flat" beat-light-2></a-sphere>
+          <a-sphere color="#fff" radius="0.125" position="0 0.25 -20" material="shader: flat" beat-light-1></a-sphere>
+          <a-sphere color="#fff" radius="0.125" position="0 -0.25 -20" material="shader: flat" beat-light-2></a-sphere>
 
       <a-camera x-counter>
         <a-entity position="0 0 -7">
-        <a-plane marker scale="1 0.025 1" color="yellow" material="shader: flat;"></a-plane>
+        <a-sphere marker radius="0.05" position="0 0.5 -0.5" color="yellow" material="shader: flat;"></a-sphere>
                    
           <a-text
           position="0.125 -1 0"
+                  rotation="0 0 -90"
           debug-text
           scale="1 1 1"
           value="Hello, World!"
@@ -342,7 +349,8 @@
           color="#fff"
         ></a-text>
         <a-text
-          position="0.125 -0.25 0"
+                  rotation="0 0 -90"
+          position="-2 4 0"
           timestamp-text
           scale="1 1 1"
           value="Hello, World!"
@@ -350,8 +358,6 @@
           color="#fff"
         ></a-text>
           
-          <a-sphere color="#fff" radius="0.125" position="-0.5 -0.5 -0.5" material="shader: flat" beat-light-1></a-sphere>
-          <a-sphere color="#fff" radius="0.125" position="-0.5 -1 -0.5" material="shader: flat" beat-light-2></a-sphere>
  
           <a-entity position="-0.5 0.5 0" cam-track>
           <a-sphere color="#fff" radius="0.125"></a-sphere>
