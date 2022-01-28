@@ -199,17 +199,6 @@
           var cameraEl = this.el.sceneEl.camera.el;
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
-          rot.x *= -1;
-          rot.x *= 8;
-
-          rot.y *= -1;
-          rot.y *= 4;
-
-          rot.z *= -1;
-          //rot.z *= 4
-
-          pos.x = 0 + rot.y / 90;
-          pos.y = 0 - rot.x / 90;
           this.el.setAttribute("rotation", rot);
           this.el.setAttribute("position", pos);
         },
@@ -316,11 +305,11 @@
         </a-entity>
       </a-entity>
       <a-entity
-        light="type: directional; color: #fff; intensity: .9"
+        light="type: directional; color: #ffaa00; intensity: .7"
         position="-3 10  5"
       ></a-entity>
       <a-entity
-        light="type: ambient; color: #dbb; intensity: 0.7"
+        light="type: ambient; color: #dbb; intensity: 1.5"
         position="3 2 5"
       ></a-entity>
       <a-entity position="2 10 -20">
@@ -368,6 +357,12 @@
         ></a-sphere>
       </a-entity>
       <a-camera x-counter>
+          <a-entity position="0 0 -10" >
+          
+            <a-entity scale="0.01 0.01 0.01" rotation="0 90 0" gltf-model="#baby" material="shader: flat;" baby-scale></a-entity>
+            
+          </a-entity>
+
         <a-entity position="0 0 -6">
           <a-sphere
             marker
@@ -397,11 +392,6 @@
             color="#fff"
           ></a-text>
 
-          <a-entity position="-0.5 0.5 0" cam-track>
-          
-            <a-entity gltf-model="#baby"  ></a-entity>
-            
-          </a-entity>
         </a-entity>
       </a-camera>
       <a-sky the-sky></a-sky>
