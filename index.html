@@ -29,7 +29,7 @@
       let b = 0;
       let lastBChangeTime = null;
       let p = 0;
-      let lastRotX;
+      let lastRotX = 0;
       let boopin = false;
 
       const envelope = {
@@ -94,6 +94,16 @@
         if (!boopin) return;
         synth.triggerAttackRelease("G5", "64n");
       }
+
+      function boink() {
+        if (!boopin) return;
+        synth3.frequency.set = 100;
+        synth3.triggerAttackRelease("E5", 0.01);
+        synth3.frequency.rampTo(2000, 0.01);
+      }
+      
+      
+
 
       function getX() {
         return x;
@@ -211,17 +221,14 @@
           var cameraEl = this.el.sceneEl.camera.el;
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
-
           if (lastRotX > 0 && rot.x <= 0) {
             x += 1;
             ding();
           } else if (lastRotX < 0 && rot.x >= 0 && boopin) {
-            synth3.frequency.set = 100;
-            synth3.triggerAttackRelease("E5", 0.01);
-            synth3.frequency.rampTo(2000, 0.01);
+            x += 1;
+            boink()
           }
-
-          lastRotX = rot.x;
+          lastRotX = rot.x
         },
       });
 
