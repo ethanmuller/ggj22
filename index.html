@@ -26,6 +26,8 @@
     <script>
       let x = 0;
       let b = 0;
+      let lastBChangeTime = null;
+      let p = 0;
       let lastY;
       let boopin = false
 
@@ -67,6 +69,7 @@
         (time, note) => {
           synth2.triggerAttackRelease(note, 0.01, time);
           b += 1
+          lastBChangeTime = time
         },
         ["C5", null]
       );
@@ -153,7 +156,8 @@
 
       AFRAME.registerComponent("pulse-light", {
         tick: function (time, deltaTime) {
-          this.el.setAttribute('color', c ? '#fff' : '#000')
+          p = Tone.now() - lastBChangeTime < 0.075
+          this.el.setAttribute('color', p ? '#ffdd00' : '#000')
         },
       });
 
@@ -179,6 +183,7 @@
             `
         X: ${x}
         B: ${b}
+        P: ${p}
         Y: ${rot.x}
         N: ${rot.y}`
           );
@@ -348,7 +353,7 @@
           color="#fff"
         ></a-text>
           
-          <a-sphere color="#fff" radius="0.05" position="-0.5 -0.75 -0.5" material="shader: flat" pulse-light></a-sphere>
+          <a-sphere color="#fff" radius="0.025" position="-0.5 -0.75 -0.5" material="shader: flat" pulse-light></a-sphere>
           <a-sphere color="#fff" radius="0.125" position="-0.5 -0.5 -0.5" material="shader: flat" beat-light-1></a-sphere>
           <a-sphere color="#fff" radius="0.125" position="-0.5 -1 -0.5" material="shader: flat" beat-light-2></a-sphere>
  
