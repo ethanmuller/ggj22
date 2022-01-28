@@ -118,9 +118,8 @@
                     var cameraEl = this.el.sceneEl.camera.el;
                     const rot = cameraEl.getAttribute("rotation");
                     const pos = cameraEl.getAttribute("position");
-                    const rot = cameraEl.getAttribute("rotation");
-                    //this.el.setAttribute('scale', `0.04 ${0.04 + Math.pow(Math.max(rot.x,0)/90, 3)} 0.04`)
-                    this.el.setAttribute('rotation', rot)
+                    this.el.setAttribute('scale', `0.04 ${0.04 + Math.pow(Math.max(rot.x,0)/90, 3)} 0.04`)
+                    //this.el.setAttribute('rotation', `${rot.x} 0 0`)
         },
       });
 
@@ -227,11 +226,6 @@
           position="40 -20 -100"
           animation="property: rotation; to: 0 360 0; dur: 5000; delay: 2499; easing: easeInOutCubic; loop: true"
         >
-          <a-entity
-            gltf-model="#reindeer"
-            position="0 0 -20"
-            scale="0.25 0.25 0.25"
-          ></a-entity>
         </a-entity>
       </a-entity>
       <a-entity
