@@ -100,12 +100,12 @@
 
       AFRAME.registerComponent("marker", {
         tick: function () {
-//           var cameraEl = this.el.sceneEl.camera.el;
-//           const pos = cameraEl.getAttribute("position");
-//           const rot = cameraEl.getAttribute("rotation");
-//           this.el.setAttribute("position", pos);
+                    var cameraEl = this.el.sceneEl.camera.el;
+          //           const pos = cameraEl.getAttribute("position");
+                    const rot = cameraEl.getAttribute("rotation");
+          //           this.el.setAttribute("position", pos);
 
-//           this.el.setAttribute("visible", rot.x > 0);
+              this.el.setAttribute("visible", rot.x > 0);
 
           p = Tone.now() - lastBChangeTime < 0.075;
           this.el.setAttribute("color", p ? "#ffdd00" : "#000");
@@ -316,57 +316,57 @@
         light="type: ambient; color: #dbb; intensity: 0.7"
         position="3 2 5"
       ></a-entity>
-      
-      <a-sphere
-        color="#fff"
-        radius="0.125"
-        position="-0.5 0.25 -20"
-        material="shader: flat"
-        beat-light-1
-      ></a-sphere>
-      <a-sphere
-        color="#fff"
-        radius="0.125"
-        position="-0.5 -0.25 -20"
-        material="shader: flat"
-        beat-light-2
-      ></a-sphere>
-      <a-sphere
-        color="#fff"
-        radius="0.125"
-        position="0 0.25 -20"
-        material="shader: flat"
-        beat-light-2
-      ></a-sphere>
-      <a-sphere
-        color="#fff"
-        radius="0.125"
-        position="0 -0.25 -20"
-        material="shader: flat"
-        beat-light-1
-      ></a-sphere>
-      <a-sphere
-        color="#fff"
-        radius="0.125"
-        position="0.5 0.25 -20"
-        material="shader: flat"
-        beat-light-1
-      ></a-sphere>
-      <a-sphere
-        color="#fff"
-        radius="0.125"
-        position="0.5 -0.25 -20"
-        material="shader: flat"
-        beat-light-2
-      ></a-sphere>
-      
+      <a-entity position="2 10 -20">
+        <a-sphere
+          color="#fff"
+          radius="0.125"
+          position="-0.5 0.25 0"
+          material="shader: flat"
+          beat-light-1
+        ></a-sphere>
+        <a-sphere
+          color="#fff"
+          radius="0.125"
+          position="-0.5 -0.25 0"
+          material="shader: flat"
+          beat-light-2
+        ></a-sphere>
+        <a-sphere
+          color="#fff"
+          radius="0.125"
+          position="0 0.25 0"
+          material="shader: flat"
+          beat-light-2
+        ></a-sphere>
+        <a-sphere
+          color="#fff"
+          radius="0.125"
+          position="0 -0.25 0"
+          material="shader: flat"
+          beat-light-1
+        ></a-sphere>
+        <a-sphere
+          color="#fff"
+          radius="0.125"
+          position="0.5 0.25 0"
+          material="shader: flat"
+          beat-light-1
+        ></a-sphere>
+        <a-sphere
+          color="#fff"
+          radius="0.125"
+          position="0.5 -0.25 0"
+          material="shader: flat"
+          beat-light-2
+        ></a-sphere>
+      </a-entity>
 
       <a-camera x-counter>
-        <a-entity position="0 0 -7">
+        <a-entity position="0 0 -6">
           <a-sphere
             marker
-            radius="0.125"
-                    position="0 0 -10"
+            radius="0.1"
+            position="0 0 0"
             color="yellow"
             material="shader: flat;"
           ></a-sphere>
