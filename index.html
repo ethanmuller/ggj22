@@ -83,7 +83,7 @@
       function boop(e) {
         boopin = true
         e.target.hidden = true
-        Tone.Transport.bpm.value = 92;
+        Tone.Transport.bpm.value = 77;
         Tone.Transport.start();
         seq.start(0);
         // confSeq.start(0);
@@ -121,6 +121,10 @@
           this.el.setAttribute("position", pos);
           
           this.el.setAttribute('visible', rot.x < 0)
+          
+          p = Tone.now() - lastBChangeTime < 0.075
+          this.el.setAttribute('color', p ? '#ffdd00' : '#000')
+
         },
       });
 
@@ -151,13 +155,6 @@
             `0 ${Math.sin((time / 60) * 0.1) * 100 + 100} 0`
           );
           //this.el.setAttribute('scale', `0 0 ${Math.sin (time*0.01)*100}`)
-        },
-      });
-
-      AFRAME.registerComponent("pulse-light", {
-        tick: function (time, deltaTime) {
-          p = Tone.now() - lastBChangeTime < 0.075
-          this.el.setAttribute('color', p ? '#ffdd00' : '#000')
         },
       });
 
@@ -353,7 +350,6 @@
           color="#fff"
         ></a-text>
           
-          <a-sphere color="#fff" radius="0.025" position="-0.5 -0.75 -0.5" material="shader: flat" pulse-light></a-sphere>
           <a-sphere color="#fff" radius="0.125" position="-0.5 -0.5 -0.5" material="shader: flat" beat-light-1></a-sphere>
           <a-sphere color="#fff" radius="0.125" position="-0.5 -1 -0.5" material="shader: flat" beat-light-2></a-sphere>
  
