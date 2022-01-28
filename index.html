@@ -118,7 +118,7 @@
                     var cameraEl = this.el.sceneEl.camera.el;
                     const rot = cameraEl.getAttribute("rotation");
 
-              this.el.setAttribute("scale", `0.1 0.1 ${rot.x * 0.001}`);
+              this.el.setAttribute("scale", `0.03 0.03 0.03`);
 
         },
       });
@@ -383,7 +383,7 @@
           ></a-sphere>
 
           <a-text
-            position="0.125 -1 0"
+            position="0.125 -1.5 0"
             rotation="0 0 -90"
             debug-text
             scale="1 1 1"
@@ -393,7 +393,7 @@
           ></a-text>
           <a-text
             rotation="0 0 -90"
-            position="-2 4 0"
+            position="-2 3.5 0"
             timestamp-text
             baseline="bottom"
             scale="1 1 1"
