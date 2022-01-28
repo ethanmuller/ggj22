@@ -123,6 +123,22 @@
         },
       });
 
+      AFRAME.registerComponent("pointy", {
+        tick: function () {
+                    var cameraEl = this.el.sceneEl.camera.el;
+                    const rot = cameraEl.getAttribute("rotation");
+                    const pos = cameraEl.getAttribute("position");
+          // pos.x = 0
+          // pos.y = 0.5
+          // pos.z = 0
+          rot.x *= -1
+          rot.y *= -1
+          rot.z *= -1
+                    this.el.setAttribute('rotation', rot)
+                    //this.el.setAttribute('rotation', `${rot.x} 0 0`)
+        },
+      });
+
       AFRAME.registerComponent("the-sky", {
         tick: function () {
           const c = getX() % 2 === 0 ? "#a01" : "#00f";
@@ -285,7 +301,10 @@
             color="yellow"
             material="shader: flat;"
           ></a-sphere>
-
+          <a-entity pointy>
+<!--           <a-cone color="tomato" radius-bottom="0.1" radius-top="0" position="0 0.1 0" height="0.5"></a-cone> -->
+          <a-box height="0.3" depth="0"></a-box>
+          </a-entity>
           <a-text
             position="0.125 -1.5 0"
             rotation="0 0 -90"
