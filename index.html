@@ -217,7 +217,7 @@ this.el.setAttribute('scale', `0.04 ${0.04 + Math.pow(Math.max(rot.x,0)/90, 3)} 
       <a-assets>
         <a-asset-item
           id="baby"
-          src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby.gltf?v=1643391257144"
+          src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Skeleton.obj?v=1643399827799"
         ></a-asset-item>
       </a-assets>
         <a-entity
@@ -241,7 +241,7 @@ this.el.setAttribute('scale', `0.04 ${0.04 + Math.pow(Math.max(rot.x,0)/90, 3)} 
       ></a-entity>
           <a-entity position="0 0 -10" >
           
-            <a-entity scale="0.04 0.04 0.04" rotation="0 0 0" gltf-model="#baby" material="shader: flat;" baby-scale></a-entity>
+            <a-entity scale="0.04 0.04 0.04" rotation="0 0 0" obj-model="obj: #baby" material="shader: flat;" baby-scale></a-entity>
             
           </a-entity>
       <a-camera x-counter>
