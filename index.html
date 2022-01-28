@@ -65,7 +65,7 @@
 
       const seq = new Tone.Sequence(
         (time, note) => {
-          synth2.triggerAttackRelease(note, 0.01, time);
+          synth2.triggerAttackRelease(b % 2 ? "C5" : "C4", 0.01, time);
           b += 1
           lastBChangeTime = time
         },
@@ -197,7 +197,9 @@
             x += 1;
             ding();
           } else if (lastY < 0 && rot.x >= 0) {
+          synth3.frequency.set = 100
             synth3.triggerAttackRelease("E5", 0.01);
+            synth3.frequency.rampTo(2000, 0.01)
           }
 
           lastY = rot.x;
@@ -337,7 +339,7 @@
 
       <a-camera x-counter>
         <a-entity position="0 0 -7">
-        <a-sphere marker radius="0.05" position="0 0.5 -0.5" color="yellow" material="shader: flat;"></a-sphere>
+        <a-sphere marker radius="0.05" position="0 0.5 -1" color="yellow" material="shader: flat;"></a-sphere>
                    
           <a-text
           position="0.125 -1 0"
