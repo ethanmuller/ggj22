@@ -144,16 +144,6 @@
         },
       });
 
-      AFRAME.registerComponent("pulse", {
-        tick: function (time, deltaTime) {
-          this.el.setAttribute(
-            "position",
-            `0 ${Math.sin((time / 60) * 0.1) * 100 + 100} 0`
-          );
-          //this.el.setAttribute('scale', `0 0 ${Math.sin (time*0.01)*100}`)
-        },
-      });
-
       AFRAME.registerComponent("beat-light-1", {
         tick: function (time, deltaTime) {
           this.el.setAttribute("color", b % 2 ? "#fff" : "#000");
@@ -290,7 +280,7 @@
         <a-entity position="0 0 -6">
           <a-sphere
             marker
-            radius="0.1"
+            radius="0.075"
             position="0 0 0"
             color="yellow"
             material="shader: flat;"
@@ -315,7 +305,6 @@
             font="sourcecodepro"
             color="#fff"
           ></a-text>
-
         </a-entity>
       </a-camera>
       <a-sky the-sky></a-sky>
