@@ -113,6 +113,16 @@
         },
       });
 
+      AFRAME.registerComponent("baby-scale", {
+        tick: function () {
+                    var cameraEl = this.el.sceneEl.camera.el;
+                    const rot = cameraEl.getAttribute("rotation");
+
+              this.el.setAttribute("scale", `0.1 0.1 ${rot.x * 0.001}`);
+
+        },
+      });
+
       AFRAME.registerComponent("the-sky", {
         tick: function () {
           const c = getX() % 2 === 0 ? "#a01" : "#00f";
@@ -356,12 +366,12 @@
           beat-light-2
         ></a-sphere>
       </a-entity>
-      <a-camera x-counter>
           <a-entity position="0 0 -10" >
           
             <a-entity scale="0.01 0.01 0.01" rotation="0 90 0" gltf-model="#baby" material="shader: flat;" baby-scale></a-entity>
             
           </a-entity>
+      <a-camera x-counter>
 
         <a-entity position="0 0 -6">
           <a-sphere
