@@ -29,7 +29,7 @@
       let b = 0;
       let lastBChangeTime = null;
       let p = 0;
-      let lastY;
+      let lastRotX;
       let boopin = false;
 
       const envelope = {
@@ -197,16 +197,16 @@
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
 
-          if (lastY > 0 && rot.x <= 0) {
+          if (lastRotX > 0 && rot.x <= 0) {
             x += 1;
             ding();
-          } else if (lastY < 0 && rot.x >= 0 && boopin) {
+          } else if (lastRotX < 0 && rot.x >= 0 && boopin) {
             synth3.frequency.set = 100;
             synth3.triggerAttackRelease("E5", 0.01);
             synth3.frequency.rampTo(2000, 0.01);
           }
 
-          lastY = rot.x;
+          lastRotX = rot.x;
         },
       });
 
@@ -301,13 +301,14 @@
             
 <!--             <a-cone radius-bottom="0.2" radius-top="0" height="0.15" rotation="90 0 0" color="cyan"></a-cone> -->
 <!--           <a-cone color="tomato" radius-bottom="0.1" radius-top="0" position="0 0.1 0" height="0.5"></a-cone> -->
-            <a-box position="0 0 0.2" height="0.355" depth="0.04" width="0.2"></a-box>
+            <a-box position="0 0 0.2" height="0.355" depth="0.04" width="0.2" eye-pupil></a-box>
           <a-sphere
             marker
             radius="0.075"
             position="0 0 0.3"
             color="yellow"
             material="shader: flat;"
+            eye-pupil
           ></a-sphere>
           </a-entity>
           <a-text
