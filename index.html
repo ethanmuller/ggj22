@@ -117,9 +117,7 @@
         tick: function () {
                     var cameraEl = this.el.sceneEl.camera.el;
                     const rot = cameraEl.getAttribute("rotation");
-
-              this.el.setAttribute("scale", `0.03 0.03 0.03`);
-
+this.el.setAttribute('scale', `0.04 ${0.04 + Math.max(rot.x, 0) / 90} 0.04`)
         },
       });
 
@@ -221,88 +219,7 @@
           id="baby"
           src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby.gltf?v=1643391257144"
         ></a-asset-item>
-        
-        <a-asset-item
-          id="rabbit"
-          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/bunny.glb?v=1640813395627"
-        ></a-asset-item>
-
-        <a-asset-item
-          id="oldman"
-          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/oldman.glb?v=1640813402522"
-        ></a-asset-item>
-
-        <a-asset-item
-          id="turnip"
-          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/raddish.fbx.glb?v=1640739064612"
-        ></a-asset-item>
-
-        <a-asset-item
-          id="mouse"
-          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/mouse.glb?v=1640813397724"
-        ></a-asset-item>
-
-        <a-asset-item
-          id="krampus"
-          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/krampus.glb?v=1640813401088"
-        ></a-asset-item>
-
-        <a-asset-item
-          id="reindeer"
-          src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/reindeer.glb?v=1640813404007"
-        ></a-asset-item>
       </a-assets>
-      <a-entity scale="1 1 1" rotation="90 0 0" pulse>
-        <a-entity
-          position="-40 20 -100"
-          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 0; easing: easeInOutCubic; loop: true"
-        >
-          <a-entity
-            gltf-model="#rabbit"
-            position="0 0 -20"
-            scale="0.25 0.25 0.5"
-          ></a-entity>
-        </a-entity>
-        <a-entity
-          position="0 30 -100"
-          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 833; easing: easeInOutCubic; loop: true"
-        >
-          <a-entity
-            gltf-model="#oldman"
-            position="0 0 -20"
-            scale="0.25 0.25 0.5"
-          ></a-entity>
-        </a-entity>
-        <a-entity
-          position="40 20 -100"
-          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 1666; easing: easeInOutCubic; loop: true"
-        >
-          <a-entity
-            gltf-model="#mouse"
-            position="0 0 -10"
-            scale="0.25 0.25 0.25"
-          ></a-entity>
-        </a-entity>
-        <a-entity
-          position="-40 -20 -100"
-          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 4165; easing: easeInOutCubic; loop: true"
-        >
-          <a-entity
-            gltf-model="#turnip"
-            position="0 0 -20"
-            scale="0.25 0.25 0.5"
-          ></a-entity>
-        </a-entity>
-        <a-entity
-          position="0 -20 -100"
-          animation="property: rotation; to: 0 360 0; dur: 5000; delay: 3332; easing: easeInOutCubic; loop: true"
-        >
-          <a-entity
-            gltf-model="#krampus"
-            position="0 0 -20"
-            scale="0.25 0.25 0.5"
-          ></a-entity>
-        </a-entity>
         <a-entity
           position="40 -20 -100"
           animation="property: rotation; to: 0 360 0; dur: 5000; delay: 2499; easing: easeInOutCubic; loop: true"
@@ -366,9 +283,9 @@
           beat-light-2
         ></a-sphere>
       </a-entity>
-          <a-entity position="0 0 -10" >
+          <a-entity position="-10 0 0" >
           
-            <a-entity scale="0.01 0.01 0.01" rotation="0 90 0" gltf-model="#baby" material="shader: flat;" baby-scale></a-entity>
+            <a-entity scale="0.04 0.04 0.04" rotation="0 90 0" gltf-model="#baby" material="shader: flat;" baby-scale></a-entity>
             
           </a-entity>
       <a-camera x-counter>
