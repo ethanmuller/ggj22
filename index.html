@@ -106,7 +106,7 @@
                     const rot = cameraEl.getAttribute("rotation");
           //           this.el.setAttribute("position", pos);
 
-              this.el.setAttribute("visible", rot.x > 0);
+              // this.el.setAttribute("visible", rot.x > 0);
 
           p = Tone.now() - lastBChangeTime < 0.075;
           this.el.setAttribute("color", p ? "#ffdd00" : "#000");
@@ -239,7 +239,14 @@ this.el.setAttribute('scale', `0.04 ${0.04 + Math.max(rot.x, 0) / 90} 0.04`)
         light="type: ambient; color: #dbb; intensity: 1.5"
         position="3 2 5"
       ></a-entity>
-      <a-entity position="2 10 -20">
+          <a-entity position="-10 0 0" >
+          
+            <a-entity scale="0.04 0.04 0.04" rotation="0 90 0" gltf-model="#baby" material="shader: flat;" baby-scale></a-entity>
+            
+          </a-entity>
+      <a-camera x-counter>
+
+      <a-entity position="2 0 -20">
         <a-sphere
           color="#fff"
           radius="0.125"
@@ -283,13 +290,6 @@ this.el.setAttribute('scale', `0.04 ${0.04 + Math.max(rot.x, 0) / 90} 0.04`)
           beat-light-2
         ></a-sphere>
       </a-entity>
-          <a-entity position="-10 0 0" >
-          
-            <a-entity scale="0.04 0.04 0.04" rotation="0 90 0" gltf-model="#baby" material="shader: flat;" baby-scale></a-entity>
-            
-          </a-entity>
-      <a-camera x-counter>
-
         <a-entity position="0 0 -6">
           <a-sphere
             marker
