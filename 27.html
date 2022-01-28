@@ -2,9 +2,8 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.36/Tone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.36/Tone.js"></script>
     <style>
       .btn {
         position: absolute;
@@ -128,8 +127,7 @@
             `${now.getFullYear()}${now.getMonth()}-${now.getDay()}-${now.getDate()} (${now.toLocaleDateString(
               "en-US",
               { weekday: "long" }
-            )}) ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}
-            ${navigator.userAgent}`
+            )}) ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}`
           );
         },
       });
@@ -218,11 +216,6 @@
     <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
     <a-scene>
       <a-assets>
-        <a-asset-item
-          id="baby"
-          src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby%40run.fbx?v=1643389043310"
-        ></a-asset-item>
-        
         <a-asset-item
           id="rabbit"
           src="https://cdn.glitch.me/091c5bb9-0f02-4514-8da3-65571a013892/bunny.glb?v=1640813395627"
@@ -370,7 +363,6 @@
 
       <a-camera x-counter>
         <a-entity position="0 0 -6">
-          <a-entity fbx-model="asdf"></a-entity>
           <a-sphere
             marker
             radius="0.1"
@@ -392,7 +384,6 @@
             rotation="0 0 -90"
             position="-2 4 0"
             timestamp-text
-            baseline="bottom"
             scale="1 1 1"
             value="Hello, World!"
             font="sourcecodepro"
