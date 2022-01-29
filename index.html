@@ -70,6 +70,7 @@
         (time, note) => {
           synth2.triggerAttackRelease(b % 2 ? "C5" : "C4", 0.01, time);
           b += 1;
+          console.log(Tone.Transport.getTicksAtTime(time))
           lastBChangeTime = time;
         },
         ["C5", null]
@@ -84,7 +85,8 @@
       function boop(e) {
         boopin = true;
         e.target.hidden = true;
-        Tone.Transport.bpm.value = 77;
+        Tone.Transport.bpm.value = 140;
+        Tone.Transport.timeSignature = "4/4";
         Tone.Transport.start();
         seq.start(0);
         // confSeq.start(0);
@@ -94,7 +96,7 @@
 
       function ding() {
         if (!boopin) return;
-        console.log(Math.abs(Tone.Ticks(Tone.Transport.now()))
+          console.log(Tone.Transport.getTicksAtTime(lastBChangeTime) - Tone.Transport.getTicksAtTime(Tone.now()))
         synth.triggerAttackRelease("G5", "64n");
       }
 
