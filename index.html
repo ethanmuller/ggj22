@@ -69,11 +69,15 @@
 
       const seq = new Tone.Sequence(
         (time, note) => {
+          if (note === 'B1') {
+            synth2.triggerAttackRelease("G2", 0.01, time);
+            return
+          }
           synth2.triggerAttackRelease(b % 2 ? "C5" : "C4", 0.01, time);
           b += 1;
           lastBChangeTime = time;
         },
-        ["C5", null]
+        ["C5", "B1"]
       );
 
       function boop(e) {
