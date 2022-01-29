@@ -118,7 +118,7 @@
         const lastBeatNowDiff = Tone.Transport.getTicksAtTime(Tone.now()) - Tone.Transport.getTicksAtTime(lastBChangeTime)
         const onBeat = lastBeatNowDiff < 48 || lastBeatNowDiff > 192 - 48
         if (onBeat) {
-          const notes = ['C5', 'E5', 'G5', 'C6' 'E5', 'G5', ]
+          const notes = ['C5', 'E5', 'G5', 'C6', 'G5', 'E5' ]
           synth.triggerAttackRelease(notes[c % notes.length], "64n");
           c += 1
           g = 1
