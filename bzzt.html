@@ -118,7 +118,8 @@
         const lastBeatNowDiff = Tone.Transport.getTicksAtTime(Tone.now()) - Tone.Transport.getTicksAtTime(lastBChangeTime)
         const onBeat = lastBeatNowDiff < 48 || lastBeatNowDiff > 192 - 48
         if (onBeat) {
-          synth.triggerAttackRelease("C5", "64n");
+          const notes = ['C5', 'E5', 'G5', 'C6' 'E5', 'G5', ]
+          synth.triggerAttackRelease(notes[c % notes.length], "64n");
           c += 1
           g = 1
         } else {
@@ -168,19 +169,6 @@
 
           p = Tone.now() - lastBChangeTime < 0.075;
           this.el.setAttribute("color", p ? "#ffee00" : "#fff");
-        },
-      });
-
-      AFRAME.registerComponent("baby-scale", {
-        tick: function () {
-          var cameraEl = this.el.sceneEl.camera.el;
-          const rot = cameraEl.getAttribute("rotation");
-          const pos = cameraEl.getAttribute("position");
-          this.el.setAttribute(
-            "scale",
-            `0.04 ${0.04 + Math.pow(Math.max(rot.x, 0) / 90, 3)} 0.04`
-          );
-          //this.el.setAttribute('rotation', `${rot.x} 0 0`)
         },
       });
 
@@ -301,12 +289,6 @@
     </script>
     <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
     <a-scene>
-      <a-assets>
-        <a-asset-item
-          id="baby"
-          src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby.gltf?v=1643391257144"
-        ></a-asset-item>
-      </a-assets>
       <a-entity
         position="40 -20 -100"
         animation="property: rotation; to: 0 360 0; dur: 5000; delay: 2499; easing: easeInOutCubic; loop: true"
@@ -320,14 +302,6 @@
         light="type: ambient; color: #dbb; intensity: 1.5"
         position="3 2 5"
       ></a-entity>
-      <a-entity position="-13 0 0">
-        <a-entity
-          scale="0.04 0.04 0.04"
-          rotation="0 90 0"
-          gltf-model="#baby"
-          baby-scale
-        ></a-entity>
-      </a-entity>
       <a-camera pos-rot-controller>
         <a-entity position="2 0 -20">
           <a-sphere
