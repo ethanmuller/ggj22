@@ -96,7 +96,7 @@
       function ding() {
         if (!boopin) return;
         const lastBeatNowDiff = Tone.Transport.getTicksAtTime(Tone.now()) - Tone.Transport.getTicksAtTime(lastBChangeTime)
-        const cond = lastBeatNowDiff < 96 || (lastBeatNowDiff + 96) > 192
+        const cond = lastBeatNowDiff < 48 || lastBeatNowDiff > 192 - 48
         if (cond) {
           synth.triggerAttackRelease("G6", "64n");
         } else {
