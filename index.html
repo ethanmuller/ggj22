@@ -89,7 +89,7 @@
       function boop(e) {
         boopin = true;
         e.target.hidden = true;
-        Tone.Transport.bpm.value = 80;
+        Tone.Transport.bpm.value = 180;
         Tone.Transport.timeSignature = "4/4";
         Tone.Transport.start();
         seq.start(0);
@@ -105,7 +105,7 @@
           synth.triggerAttackRelease("G6", "64n");
           c += 1
         } else {
-          buzzSynth.triggerAttackRelease("G1", "64n");
+          buzzSynth.triggerAttackRelease("D#2", "64n");
         }
       }
 
