@@ -209,6 +209,7 @@
         B: ${b}
         P: ${p}
         E: ${extreme}
+        D: ${dir}
         Y: ${rot.x}
         N: ${rot.y}`
           );
@@ -223,14 +224,25 @@
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
 
+          const thresh = 4
+          
+          if (dir === -1) {
+            if (rot.x < extreme) {
+              extreme = rot.x
+            }
+          } else if (dir === 1) {
+            if (rot.x > extreme) {
+              extreme = rot.x
+            }
+          }
           
           //if (!boopin) return;
-          if (lastRotX > rot.x && dir !== -1) {
+          if (lastRotX > rot.x && dir !== -1 && Math.abs(extreme - rot.x) > thresh) {
             // down
             x += 1;
             dir = -1;
             ding();
-          } else if (lastRotX < rot.x && dir !== 1) {
+          } else if (lastRotX < rot.x && dir !== 1 && Math.abs(extreme - rot.x) > thresh) {
             // up
             x += 1;
             dir = 1;
