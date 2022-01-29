@@ -94,6 +94,7 @@
 
       function ding() {
         if (!boopin) return;
+        console.log(Math.abs(Tone.Ticks(Tone.Transport.now()))
         synth.triggerAttackRelease("G5", "64n");
       }
 
