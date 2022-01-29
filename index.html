@@ -221,10 +221,12 @@
           var cameraEl = this.el.sceneEl.camera.el;
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
+          
+          if (!boopin) return
           if (lastRotX > 0 && rot.x <= 0) {
             x += 1;
             ding();
-          } else if (lastRotX < 0 && rot.x >= 0 && boopin) {
+          } else if (lastRotX < 0 && rot.x >= 0) {
             x += 1;
             boink()
           }
