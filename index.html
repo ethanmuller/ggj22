@@ -47,9 +47,15 @@
         envelope,
       });
 
+      const buzzSynth = new Tone.Synth({
+        oscillator: { type: "amsawtooth" },
+        envelope,
+      });
+
       const panner = new Tone.Panner(0.5).toDestination();
 
       synth.connect(panner);
+      buzzSynth.connect(panner);
 
       const synth2 = new Tone.Synth({
         oscillator: { type: "sine" },
@@ -70,7 +76,7 @@
       const seq = new Tone.Sequence(
         (time, note) => {
           if (note === 'B1') {
-            synth2.triggerAttackRelease("G2", 0.01, time);
+            //synth2.triggerAttackRelease("G2", 0.01, time);
             return
           }
           synth2.triggerAttackRelease(b % 2 ? "C5" : "C4", 0.01, time);
@@ -99,8 +105,7 @@
           synth.triggerAttackRelease("G6", "64n");
           c += 1
         } else {
-          
-          synth.triggerAttackRelease("G5", "64n");
+          buzzSynth.triggerAttackRelease("G1", "64n");
         }
       }
 
@@ -395,9 +400,8 @@
           ></a-text>
           <a-text
             rotation="0 0 -90"
-            position="-2 3.5 0"
+            position="2 3.5 0"
             timestamp-text
-            baseline="bottom"
             scale="1 1 1"
             value="Hello, World!"
             font="sourcecodepro"
