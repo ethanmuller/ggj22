@@ -31,6 +31,7 @@
       let p = 0;
       let lastRotX = 0 
       let extreme = 0
+      let c = 0
      let dir = 0;
       let boopin = false;
 
@@ -74,12 +75,6 @@
         },
         ["C5", null]
       );
-      const confSeq = new Tone.Sequence(
-        (time, note) => {
-          synth3.triggerAttackRelease(note, 0.01, time);
-        },
-        [null, "C7"]
-      );
 
       function boop(e) {
         boopin = true;
@@ -88,7 +83,6 @@
         Tone.Transport.timeSignature = "4/4";
         Tone.Transport.start();
         seq.start(0);
-        // confSeq.start(0);
       }
 
       document.getElementById("boop").addEventListener("click", boop);
@@ -96,9 +90,10 @@
       function ding() {
         if (!boopin) return;
         const lastBeatNowDiff = Tone.Transport.getTicksAtTime(Tone.now()) - Tone.Transport.getTicksAtTime(lastBChangeTime)
-        const cond = lastBeatNowDiff < 48 || lastBeatNowDiff > 192 - 48
-        if (cond) {
+        const onBeat = lastBeatNowDiff < 48 || lastBeatNowDiff > 192 - 48
+        if (onBeat) {
           synth.triggerAttackRelease("G6", "64n");
+          c += 1
         } else {
           
           synth.triggerAttackRelease("G5", "64n");
@@ -218,6 +213,7 @@
         X: ${x}
         B: ${b}
         P: ${p}
+        C: ${c}
         E: ${extreme}
         D: ${dir}
         Y: ${rot.x}
@@ -256,7 +252,7 @@
             // up
             x += 1;
             dir = 1;
-            boink()
+            ding();
           }
           lastRotX = rot.x;
         },
