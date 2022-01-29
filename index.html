@@ -29,9 +29,9 @@
       let b = 0;
       let lastBChangeTime = null;
       let p = 0;
-      let lastRotX = 0;
-      let flipRotX = 0;
-      let dir = 0;
+      let lastRotX = 0 
+      let extreme = 0
+     let dir = 0;
       let boopin = false;
 
       const envelope = {
@@ -208,6 +208,7 @@
         X: ${x}
         B: ${b}
         P: ${p}
+        E: ${extreme}
         Y: ${rot.x}
         N: ${rot.y}`
           );
@@ -221,19 +222,18 @@
           var cameraEl = this.el.sceneEl.camera.el;
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
-const cond = Math.abs(flipRotX - rot.x) > 10
+
+          
           //if (!boopin) return;
-          if (lastRotX > rot.x && dir !== -1 && cond) {
+          if (lastRotX > rot.x && dir !== -1) {
             // down
             x += 1;
             dir = -1;
-            flipRotX = rot.x
             ding();
-          } else if (lastRotX < rot.x && dir !== 1 && cond) {
+          } else if (lastRotX < rot.x && dir !== 1) {
             // up
             x += 1;
             dir = 1;
-            flipRotX = rot.x
             boink()
           }
           lastRotX = rot.x;
