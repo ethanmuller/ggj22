@@ -29,12 +29,12 @@
       let b = 0;
       let lastBChangeTime = null;
       let p = 0;
-      let lastRotX = 0 
-      let extreme = 0
-      let c = 0
-      let g = 0
-      let s = 0
-     let dir = 0;
+      let lastRotX = 0;
+      let extreme = 0;
+      let c = 0;
+      let g = 0;
+      let s = 0;
+      let dir = 0;
       let boopin = false;
 
       const envelope = {
@@ -77,25 +77,24 @@
 
       const metronome = new Tone.Sequence(
         (time, note) => {
-          if (note === 'B1') {
+          if (note === "B1") {
             //synth2.triggerAttackRelease("G2", 0.01, time);
-            
+
             if (s >= 2 && g === 1) {
               buzzSynth.triggerAttackRelease("D#2", "64n");
-              c = 0
-              s = 0
-              g = 0
+              c = 0;
+              s = 0;
+              g = 0;
             } else {
-              
             }
-            return
+            return;
           }
           b += 1;
-          
+
           if (g) {
             s += 1;
           }
-          
+
           synth2.triggerAttackRelease(b % 2 ? "C5" : "G5", 0.01, time);
           lastBChangeTime = time;
         },
@@ -115,18 +114,21 @@
 
       function ding() {
         if (!boopin) return;
-        const lastBeatNowDiff = Tone.Transport.getTicksAtTime(Tone.now()) - Tone.Transport.getTicksAtTime(lastBChangeTime)
-        const onBeat = lastBeatNowDiff < 48 || lastBeatNowDiff > 192 - 48
+        const lastBeatNowDiff =
+          Tone.Transport.getTicksAtTime(Tone.now()) -
+          Tone.Transport.getTicksAtTime(lastBChangeTime);
+        const onBeat = lastBeatNowDiff < 48 || lastBeatNowDiff > 192 - 48;
         if (onBeat) {
-          synth.triggerAttackRelease("C5", "64n");
-          c += 1
-          g = 1
+          const notes = ["C5", "E5", "G5", "C6", "G5", "E5"];
+          synth.triggerAttackRelease(notes[c % notes.length], "64n");
+          c += 1;
+          g = 1;
         } else {
           buzzSynth.triggerAttackRelease("D#2", "64n");
-          c = 0
-          g = 0
+          c = 0;
+          g = 0;
         }
-          s = 0
+        s = 0;
       }
 
       function boink() {
@@ -149,8 +151,8 @@
 
           // this.el.setAttribute("visible", rot.x > 0);
 
-          this.el.setAttribute("rotation",  `${dir === 1 ? 0 : -180} 0 0`)
-          this.el.setAttribute("position",  `0 ${dir === 1 ? 0.1 : -0.1} 0.2`)
+          this.el.setAttribute("rotation", `${dir === 1 ? 0 : -180} 0 0`);
+          this.el.setAttribute("position", `0 ${dir === 1 ? 0.1 : -0.1} 0.2`);
           p = Tone.now() - lastBChangeTime < 0.2;
           this.el.setAttribute("radius", p ? 0.06 : 0.075);
           this.el.setAttribute("color", p ? "#f00" : "#000");
@@ -182,6 +184,17 @@
           rot.z *= -1;
           this.el.setAttribute("rotation", rot);
           //this.el.setAttribute('rotation', `${rot.x} 0 0`)
+        },
+      });
+
+      AFRAME.registerComponent("baby-scale", {
+        tick: function () {
+          var cameraEl = this.el.sceneEl.camera.el;
+          const rot = cameraEl.getAttribute("rotation");
+          this.el.setAttribute(
+            "scale",
+            `0.04 ${0.04 + Math.pow(Math.max(rot.x, 0) / 90, 3)} 0.04`
+          );
         },
       });
 
@@ -248,25 +261,33 @@
           const pos = cameraEl.getAttribute("position");
           const rot = cameraEl.getAttribute("rotation");
 
-          const thresh = 2
-          
+          const thresh = 2;
+
           if (dir === -1) {
             if (rot.x < extreme) {
-              extreme = rot.x
+              extreme = rot.x;
             }
           } else if (dir === 1) {
             if (rot.x > extreme) {
-              extreme = rot.x
+              extreme = rot.x;
             }
           }
-          
+
           //if (!boopin) return;
-          if (lastRotX > rot.x && dir !== -1 && Math.abs(extreme - rot.x) > thresh) {
+          if (
+            lastRotX > rot.x &&
+            dir !== -1 &&
+            Math.abs(extreme - rot.x) > thresh
+          ) {
             // down
             x += 1;
             dir = -1;
             ding();
-          } else if (lastRotX < rot.x && dir !== 1 && Math.abs(extreme - rot.x) > thresh) {
+          } else if (
+            lastRotX < rot.x &&
+            dir !== 1 &&
+            Math.abs(extreme - rot.x) > thresh
+          ) {
             // up
             x += 1;
             dir = 1;
@@ -288,12 +309,23 @@
     </script>
     <!--     fog="type: linear; color: #301; near: 0; far: 100"> -->
     <a-scene>
-      <a-assets>
+      
+            <a-assets>
         <a-asset-item
           id="baby"
           src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby.gltf?v=1643391257144"
         ></a-asset-item>
       </a-assets>
+      <a-entity position="-13 0 0">
+        <a-entity
+          scale="0.04 0.04 0.04"
+          rotation="0 90 0"
+          gltf-model="#baby"
+          baby-scale
+        ></a-entity>
+      </a-entity>
+
+      
       <a-entity
         position="40 -20 -100"
         animation="property: rotation; to: 0 360 0; dur: 5000; delay: 2499; easing: easeInOutCubic; loop: true"
@@ -382,8 +414,8 @@
             <a-cone
               marker
               eye-pupil
-                    radius-bottom="0.075"
-                    radius-top="0"
+              radius-bottom="0.075"
+              radius-top="0"
               height="0.1"
               position="0 0 0.05"
               color="yellow"
