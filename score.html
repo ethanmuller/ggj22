@@ -74,6 +74,12 @@
       });
 
       synth3.connect(panner2);
+      
+      function announceScore(num) {
+                var utterance = new SpeechSynthesisUtterance(`you got ${c}`);
+                utterance.pitch = 5;
+                window.speechSynthesis.speak(utterance)
+      }
 
       const metronome = new Tone.Sequence(
         (time, note) => {
@@ -84,9 +90,6 @@
               
 
               if (c > 0) {
-                var utterance = new SpeechSynthesisUtterance(`you got ${c}`);
-                utterance.pitch = 5;
-                window.speechSynthesis.speak(utterance)
               }              
                 buzzSynth.triggerAttackRelease("D#2", "64n"); 
               
@@ -134,9 +137,7 @@
           g = 1;
         } else {
           if (c > 0) {
-            var utterance = new SpeechSynthesisUtterance(`you got ${c}`);
-            utterance.pitch = 5;
-            window.speechSynthesis.speak(utterance)
+            announceScore(c)
           }
             buzzSynth.triggerAttackRelease("D#2", "64n"); 
           c = 0;
