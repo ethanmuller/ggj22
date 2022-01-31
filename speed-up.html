@@ -36,8 +36,8 @@
       let s = 0;
       let dir = 0;
       let boopin = false;
-      const baseBPM = 80
-      let bpm = baseBPM
+      const baseBPM = 80;
+      let bpm = baseBPM;
 
       const envelope = {
         attack: 0.002,
@@ -76,25 +76,35 @@
       });
 
       synth3.connect(panner2);
-      
+
       function announceScore(num) {
-        let phrase = `you got ${c}. `
-        
+        let phrase = `you got ${c}. `;
+
         if (c >= 100) {
-          phrase += 'holy shit!'
+          phrase += "holy shit!";
         } else if (c >= 8) {
-          phrase += 'good job!'
-        } 
-                var utterance = new SpeechSynthesisUtterance(phrase);
-                utterance.pitch = 5;
-                window.speechSynthesis.speak(utterance)
+          phrase += "good job!";
+        }
+        var utterance = new SpeechSynthesisUtterance(phrase);
+        utterance.pitch = 5;
+        window.speechSynthesis.speak(utterance);
       }
-      
+
       function end(c) {
-              if (c > 0) {
-            announceScore(c)
-              }              
-                buzzSynth.triggerAttackRelease("D#2", "64n"); 
+        if (c > 0) {
+          announceScore(c);
+        }
+        buzzSynth.triggerAttackRelease("D#2", "64n");
+        
+        boopin = false
+        Tone.Transport.stop();
+        
+          Tone.Transport.bpm.rampTo(baseBPM, "64n");
+        
+        window.setTimeout(() => {
+          boopin = true
+          Tone.Transport.start()
+        }, 3000)
       }
 
       const metronome = new Tone.Sequence(
@@ -103,11 +113,8 @@
             //synth2.triggerAttackRelease("G2", 0.01, time);
 
             if (s >= 2 && g === 1) {
-              
+              end(c);
 
-              end(c)
-              
-              
               c = 0;
               s = 0;
               g = 0;
@@ -148,14 +155,13 @@
           const notes = ["C5", "E5", "G5", "C6", "G5", "E5"];
           synth.triggerAttackRelease(notes[c % notes.length], "64n");
           c += 1;
-          bpm = baseBPM + c*2
-        Tone.Transport.bpm.rampTo(bpm, "64n")
+          bpm = baseBPM + c * 2;
+          Tone.Transport.bpm.rampTo(bpm, "64n");
           g = 1;
         } else {
-          end(c)
+          end(c);
           c = 0;
           g = 0;
-          Tone.Transport.bpm.rampTo(baseBPM, "64n")
         }
         s = 0;
       }
