@@ -131,6 +131,15 @@
       }
 
       document.getElementById("boop").addEventListener("click", boop);
+      
+      function calcHarmonicSeries(n) {
+        let result = 0
+        while( n > 0 ){
+          result += 1/n;
+          n--;
+        }
+        return result
+      }
 
       function ding() {
         if (!boopin) return;
@@ -140,8 +149,9 @@
         const onBeat = lastBeatNowDiff < 48 || lastBeatNowDiff > 192 - 48;
         if (onBeat) {
           const c5 = 523.25
-          const notes = [];
-          synth.triggerAttackRelease(notes[c % notes.length], "64n");
+          const notes = [c5*1/1, c5*3/2, c5*11/6, c5*25/12, c5*137/60, c5*49/20, c5*363/140, c5*761/280, c5*7129/2520];
+          console.log(calcHarmonicSeries(c+1))
+          synth.triggerAttackRelease(c5*calcHarmonicSeries(c+1), "64n");
           c += 1;
           g = 1;
         } else {
