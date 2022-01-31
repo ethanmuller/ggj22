@@ -99,6 +99,7 @@
         boopin = false
         Tone.Transport.stop();
         
+        bpm = baseBPM
           Tone.Transport.bpm.rampTo(baseBPM, "64n");
         
         window.setTimeout(() => {
@@ -144,6 +145,7 @@
       }
 
       document.getElementById("boop").addEventListener("click", boop);
+      
 
       function ding() {
         if (!boopin) return;
@@ -152,8 +154,9 @@
           Tone.Transport.getTicksAtTime(lastBChangeTime);
         const onBeat = lastBeatNowDiff < 48 || lastBeatNowDiff > 192 - 48;
         if (onBeat) {
-          const notes = ["C5", "E5", "G5", "C6", "G5", "E5"];
-          synth.triggerAttackRelease(notes[c % notes.length], "64n");
+          
+          const c5 = 523.25
+          synth.triggerAttackRelease(c5 + c*32, "64n");
           c += 1;
           bpm = baseBPM + c * 2;
           Tone.Transport.bpm.rampTo(bpm, "64n");
