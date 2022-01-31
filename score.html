@@ -76,7 +76,14 @@
       synth3.connect(panner2);
       
       function announceScore(num) {
-                var utterance = new SpeechSynthesisUtterance(`you got ${c}`);
+        let phrase = `you got ${c}. `
+        
+        if (c >= 100) {
+          phrase += 'holy shit!'
+        } else if (c >= 8) {
+          phrase += 'good job!'
+        } 
+                var utterance = new SpeechSynthesisUtterance(phrase);
                 utterance.pitch = 5;
                 window.speechSynthesis.speak(utterance)
       }
@@ -90,6 +97,7 @@
               
 
               if (c > 0) {
+            announceScore(c)
               }              
                 buzzSynth.triggerAttackRelease("D#2", "64n"); 
               
