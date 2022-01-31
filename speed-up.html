@@ -89,6 +89,13 @@
                 utterance.pitch = 5;
                 window.speechSynthesis.speak(utterance)
       }
+      
+      function end(c) {
+              if (c > 0) {
+            announceScore(c)
+              }              
+                buzzSynth.triggerAttackRelease("D#2", "64n"); 
+      }
 
       const metronome = new Tone.Sequence(
         (time, note) => {
@@ -98,10 +105,7 @@
             if (s >= 2 && g === 1) {
               
 
-              if (c > 0) {
-            announceScore(c)
-              }              
-                buzzSynth.triggerAttackRelease("D#2", "64n"); 
+              end(c)
               
               
               c = 0;
@@ -144,14 +148,11 @@
           const notes = ["C5", "E5", "G5", "C6", "G5", "E5"];
           synth.triggerAttackRelease(notes[c % notes.length], "64n");
           c += 1;
-          bpm = baseBPM + c
+          bpm = baseBPM + c*2
         Tone.Transport.bpm.rampTo(bpm, "64n")
           g = 1;
         } else {
-          if (c > 0) {
-            announceScore(c)
-          }
-            buzzSynth.triggerAttackRelease("D#2", "64n"); 
+          end(c)
           c = 0;
           g = 0;
           Tone.Transport.bpm.rampTo(baseBPM, "64n")
@@ -276,7 +277,8 @@
         E: ${extreme}
         D: ${dir}
         Y: ${rot.x}
-        N: ${rot.y}`
+        N: ${rot.y}
+        R: ${bpm}BPM`
           );
 
           // Do something.
