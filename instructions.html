@@ -50,7 +50,7 @@
       let s = 0;
       let dir = 0;
       let boopin = false;
-      const baseBPM = 80;
+      const baseBPM = 70;
       let bpm = baseBPM;
 
       const envelope = {
@@ -96,6 +96,10 @@
 
         if (c >= 100) {
           phrase += "holy crap!";
+        } else if (c === 69) {
+          phrase += "nice!";
+        } else if (c >= 64) {
+          phrase += "you're good at this!";
         } else if (c >= 8) {
           phrase += "good job!";
         }
@@ -162,7 +166,11 @@
       
 
       function ding() {
-        if (!boopin) return;
+        if (!boopin) {
+          buzzSynth.triggerAttackRelease("D#2", "64n");
+          return; 
+        }
+        
         const lastBeatNowDiff =
           Tone.Transport.getTicksAtTime(Tone.now()) -
           Tone.Transport.getTicksAtTime(lastBChangeTime);
@@ -184,7 +192,10 @@
       }
 
       function boink() {
-        if (!boopin) return;
+        if (!boopin) {
+          buzzSynth.triggerAttackRelease("D#2", "64n");
+          return;
+        }
         synth3.frequency.set = 100;
         synth3.triggerAttackRelease("E5", 0.01);
         synth3.frequency.rampTo(2000, 0.01);
@@ -368,10 +379,10 @@
           src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby.gltf?v=1643391257144"
         ></a-asset-item>
       </a-assets>
-      <a-entity position="-13 0 0">
+      <a-entity position="0 0 13">
         <a-entity
           scale="0.04 0.04 0.04"
-          rotation="0 90 0"
+          rotation="0 180 0"
           gltf-model="#baby"
           baby-scale
         ></a-entity>
@@ -484,7 +495,7 @@
           ></a-text>
           <a-text
             rotation="0 0 -90"
-            position="2 3.5 0"
+            position="-2 3.5 -2"
             timestamp-text
             scale="1 1 1"
             value="Hello, World!"
@@ -497,11 +508,11 @@
     </a-scene>
     <header>
     <p>
-      mobile instructions:
+      instructions:
     </p>
     <ol>
       <li>activate sound</li>
-      <li>optionally: hold your phone against your forehead</li>
+      <li>if on mobile, hold device against your forehead and nod to beat. if on PC, click and drag to beat</li>
       <li>move to the beat, down up down up</li>
       <li>if you move off beat or stop moving, buzz, game over</li>
     </ol>
