@@ -22,6 +22,7 @@
       
       header {
         color: white;
+        text-shadow: 0 0 30px #00f;
         position: absolute;
         z-index: 999;
         top: 0;
@@ -36,7 +37,7 @@
     </style>
   </head>
   <body>
-    <button class="btn" id="boop">ACTIVATE SOUND</button>
+    <button class="btn" id="boop">ACTIVATE PULSE</button>
     <button class="btn" id="unboop" hidden="true">DEACTIVATE SOUND 🙅👂</button>
     <script>
       let x = 0;
@@ -263,7 +264,7 @@
 
       AFRAME.registerComponent("the-sky", {
         tick: function () {
-          const c = getX() % 2 === 0 ? "#a01" : "#00f";
+          const c = getX() % 2 === 0 ? "#00f" : "#00f";
           this.el.setAttribute("color", c);
         },
       });
@@ -511,11 +512,14 @@
       instructions:
     </p>
     <ol>
-      <li>activate sound</li>
+      <li>activate pulse</li>
       <li>if on mobile, hold device against your forehead and nod to beat. if on PC, click and drag to beat</li>
       <li>move to the beat, down up down up</li>
       <li>if you move off beat or stop moving, buzz, game over</li>
     </ol>
+      <p>
+        warining: if you are 
+      </p>
     </header>
   </body>
 </html>
