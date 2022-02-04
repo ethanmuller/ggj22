@@ -108,9 +108,9 @@
         },
       });
       
-      const mosquitoBaseLFO = new Tone.LFO(2, 250, 600) 
+      const lfo = new Tone.LFO(2, 250, 600).start()
       
-      mosquitoBaseLFO.connect(mosquitoSynth.oscillator.frequency)
+      lfo.connect(mosquitoSynth.frequency)
 
       const panner = new Tone.Panner(0.5).toDestination();
 
