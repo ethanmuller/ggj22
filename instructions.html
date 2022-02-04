@@ -6,13 +6,19 @@
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.36/Tone.min.js"></script>
     <style>
-      .btn {
-        position: absolute;
+      body, html {
+        min-height: 100%;
+      }
+      
+      .btn-wrapper {
+        position: fixed;
         z-index: 999;
         bottom: 5rem;
         right: 1.5rem;
-        margin-top: 1rem;
-        margin-left: -1rem;
+      }
+      
+      .btn {
+        margin: 1rem;
 
         background: transparent;
         color: white;
@@ -37,8 +43,28 @@
     </style>
   </head>
   <body>
-    <button class="btn" id="boop">ACTIVATE PULSE</button>
-    <button class="btn" id="unboop" hidden="true">DEACTIVATE SOUND 🙅👂</button>
+    
+    
+    <header>
+    <p>
+      instructions:
+    </p>
+    <ol>
+      <li>activate pulse</li>
+      <li>if on mobile, please hold device against your forehead and nod to beat. if on PC, click and drag to beat</li>
+      <li>move to the beat, down up down up</li>
+      <li>if you move off beat or stop moving, buzz, game over</li>
+    </ol>
+      
+      <p>
+        warning: headphones required, but not bluetooth ones
+      </p>
+    
+      <div class="btn-wrapper">
+        <button class="btn" id="boop">ACTIVATE PULSE</button>
+        <button class="btn" id="unboop" hidden="true">DEACTIVATE SOUND 🙅👂</button>
+      </div>
+    </header>
     <script>
       let x = 0;
       let b = 0;
@@ -51,6 +77,7 @@
       let s = 0;
       let dir = 0;
       let boopin = false;
+      let skeetin = false;
       const baseBPM = 70;
       let bpm = baseBPM;
 
@@ -105,7 +132,7 @@
           phrase += "good job!";
         }
         var utterance = new SpeechSynthesisUtterance(phrase);
-        utterance.pitch = 5;
+        //utterance.pitch = 5;
         window.speechSynthesis.speak(utterance);
       }
 
@@ -156,6 +183,10 @@
 
       function boop(e) {
         boopin = true;
+        
+        var utterance = new SpeechSynthesisUtterance('start');
+        window.speechSynthesis.speak(utterance);
+        
         e.target.hidden = true;
         Tone.Transport.bpm.value = baseBPM;
         Tone.Transport.timeSignature = "4/4";
@@ -511,19 +542,5 @@
       </a-camera>
       <a-sky the-sky></a-sky>
     </a-scene>
-    <header>
-    <p>
-      instructions:
-    </p>
-    <ol>
-      <li>activate pulse</li>
-      <li>if on mobile, please hold device against your forehead and nod to beat. if on PC, click and drag to beat</li>
-      <li>move to the beat, down up down up</li>
-      <li>if you move off beat or stop moving, buzz, game over</li>
-    </ol>
-      <p>
-        warning: bluetooth headphones not recommended
-      </p>
-    </header>
   </body>
 </html>
