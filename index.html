@@ -98,9 +98,13 @@
         envelope,
       });
 
-      const buzzSynth = new Tone.Synth({
+      const mosquitoSynth = new Tone.Synth({
         oscillator: { type: "amsawtooth" },
-        envelope,
+        envelope: {
+          attack: 1,
+          decay: 1,
+          release: 0,
+        },
       });
 
       const panner = new Tone.Panner(0.5).toDestination();
@@ -191,7 +195,7 @@
         
         e.target.hidden = true;
         
-          mosquitoSynth.triggerAttack("D#2");
+        mosquitoSynth.triggerAttack("D#2");
         var utterance = new SpeechSynthesisUtterance('mosquito released');
         window.speechSynthesis.speak(utterance);
       }
