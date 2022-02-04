@@ -183,6 +183,10 @@
 
       function boop(e) {
         boopin = true;
+        
+        var utterance = new SpeechSynthesisUtterance('start');
+        window.speechSynthesis.speak(utterance);
+        
         e.target.hidden = true;
         Tone.Transport.bpm.value = baseBPM;
         Tone.Transport.timeSignature = "4/4";
