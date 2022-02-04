@@ -103,14 +103,20 @@
         envelope: {
           attack: 1,
           decay: 1,
+          sustain: 1,
           release: 0,
         },
       });
+      
+      const mosquitoBaseLFO = new Tone.LFO(2, 250, 600) 
+      
+      mosquitoBaseLFO.connect(mosquitoSynth.oscillator.frequency)
 
       const panner = new Tone.Panner(0.5).toDestination();
 
       synth.connect(panner);
       buzzSynth.connect(panner);
+      mosquitoSynth.connect(panner);
 
       const synth2 = new Tone.Synth({
         oscillator: { type: "sine" },
@@ -195,7 +201,7 @@
         
         e.target.hidden = true;
         
-        mosquitoSynth.triggerAttack("D#2");
+        mosquitoSynth.triggerAttack(250);
         var utterance = new SpeechSynthesisUtterance('mosquito released');
         window.speechSynthesis.speak(utterance);
       }
