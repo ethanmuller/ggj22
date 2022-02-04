@@ -299,7 +299,7 @@
 
       AFRAME.registerComponent("the-sky", {
         tick: function () {
-          const c = getX() % 2 === 0 ? "#00f" : "#00f";
+          const c = d > 0 ? "#f00" : "#00f";
           this.el.setAttribute("color", c);
         },
       });
