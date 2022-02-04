@@ -98,6 +98,11 @@
         envelope,
       });
 
+      const buzzSynth = new Tone.Synth({
+        oscillator: { type: "amsawtooth" },
+        envelope,
+      });
+
       const panner = new Tone.Panner(0.5).toDestination();
 
       synth.connect(panner);
