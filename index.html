@@ -62,6 +62,7 @@
     
       <div class="btn-wrapper">
         <button class="btn" id="boop">ACTIVATE PULSE</button>
+        <button class="btn" id="skeeter">RELEASE MOSQUITO</button>
         <button class="btn" id="unboop" hidden="true">DEACTIVATE SOUND 🙅👂</button>
       </div>
     </header>
@@ -77,7 +78,6 @@
       let s = 0;
       let dir = 0;
       let boopin = false;
-      let skeetin = false;
       const baseBPM = 70;
       let bpm = baseBPM;
 
@@ -181,10 +181,15 @@
         ["C5", "B1"]
       );
       
-      function skeeter(e) {
-        alert('ya')
+      function releaseSkeeter(e) {
+        skeetin = true;
+        
+        e.target.hidden = true;
+        
+          mosquitoSynth.triggerAttack("D#2");
+        var utterance = new SpeechSynthesisUtterance('mosquito released');
+        window.speechSynthesis.speak(utterance);
       }
-      document.getElementById("mosquito").addEventListener("click", skeeter);
 
       function boop(e) {
         boopin = true;
@@ -200,6 +205,7 @@
       }
 
       document.getElementById("boop").addEventListener("click", boop);
+      document.getElementById("skeeter").addEventListener("click", releaseSkeeter);
       
 
       function ding() {
