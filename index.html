@@ -57,12 +57,12 @@
     </ol>
       
       <p>
-        warning: bluetooth headphones not recommended
+        warning: headphones required, but not bluetooth ones
       </p>
     
       <div class="btn-wrapper">
         <button class="btn" id="boop">ACTIVATE PULSE</button>
-        <button class="btn" id="skeeter">ACTIVATE MOSQUITO</button>
+        <button class="btn" id="skeeter">RELEASE MOSQUITO</button>
         <button class="btn" id="unboop" hidden="true">DEACTIVATE SOUND 🙅👂</button>
       </div>
     </header>
@@ -132,7 +132,7 @@
           phrase += "good job!";
         }
         var utterance = new SpeechSynthesisUtterance(phrase);
-        utterance.pitch = 5;
+        //utterance.pitch = 5;
         window.speechSynthesis.speak(utterance);
       }
 
