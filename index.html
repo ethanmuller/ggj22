@@ -100,6 +100,7 @@
 
       const v = new Tone.Vibrato (0.5, 0.8).toDestination()
       
+      const mosquitoPan = new Tone.Panner3D(0, 0, 0)
       const mosquitoSynth = new Tone.Synth({
         oscillator: { type: "amsawtooth" },
         envelope: {
@@ -108,7 +109,8 @@
           sustain: 1,
           release: 0,
         },
-      }).connect(v);
+      }).chain(mosquitoPan, v);
+      
       
       // const lfo = new Tone.LFO(0.1, 470, 480).start()
       // lfo.connect(mosquitoSynth.frequency)
@@ -226,9 +228,9 @@
       function ding() {
         if (!boopin) {
           try {
-            buzzSynth.triggerAttackRelease("D#2", "64n");
+            // buzzSynth.triggerAttackRelease("D#2", "64n");
           } catch(e) {
-            console.warn(e)
+            // console.warn(e)
           }
           return; 
         }
@@ -289,11 +291,12 @@
         },
         tick: function () {
           const t = Date.now()/1000/4
-          const s = Math.sin(Date.now()/1000*4)
+          const s = Math.sin(Date.now()/1000*2)
+          const s3 = Math.sin(Date.now()/1000*2/3)
           const c = Math.cos(Date.now()/1000*4)
           console.log(t,s,c)
-          this.el.setAttribute("position", `${s*10} 0 ${c*10}`);
-          mosquitoPan.setPosition(s*10 )
+          this.el.setAttribute("position", `${s*2} ${s3*2} ${c*10}`);
+          mosquitoPan.setPosition(s*2, s3*2, c*10)
         },
       });
 
