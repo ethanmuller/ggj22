@@ -293,6 +293,7 @@
           const c = Math.cos(Date.now()/1000*4)
           console.log(t,s,c)
           this.el.setAttribute("position", `${s*10} 0 ${c*10}`);
+          mosquitoPan.setPosition(s*10 )
         },
       });
 
