@@ -199,6 +199,8 @@
       function releaseSkeeter(e) {
         skeetin = true;
         
+        mosquitoSynth.triggerAttack(480)
+        
         e.target.hidden = true;
         var utterance = new SpeechSynthesisUtterance('mosquito released');
         window.speechSynthesis.speak(utterance);
@@ -283,19 +285,14 @@
       });
 
       AFRAME.registerComponent("synth", {
+        init: function () {
+        },
         tick: function () {
-          var cameraEl = this.el.sceneEl.camera.el;
-          //           const pos = cameraEl.getAttribute("position");
-          const rot = cameraEl.getAttribute("rotation");
-          //           this.el.setAttribute("position", pos);
-
-          // this.el.setAttribute("visible", rot.x > 0);
-
-          this.el.setAttribute("rotation", `${dir === 1 ? 0 : -180} 0 0`);
-          this.el.setAttribute("position", `0 ${dir === 1 ? 0.1 : -0.1} 0.2`);
-          p = Tone.now() - lastBChangeTime < 0.2;
-          this.el.setAttribute("radius", p ? 0.06 : 0.075);
-          this.el.setAttribute("color", p ? "#f00" : "#000");
+          const t = Date.now()/1000/4
+          const s = Math.sin(Date.now()/1000*4)
+          const c = Math.cos(Date.now()/1000*4)
+          console.log(t,s,c)
+          this.el.setAttribute("position", `${s*10} 0 ${c*10}`);
         },
       });
 
@@ -480,6 +477,12 @@
         light="type: ambient; color: #dbb; intensity: 1.5"
         position="3 2 5"
       ></a-entity>
+      
+          <a-sphere
+                    position="0 0 -10"
+                    synth
+          ></a-sphere>
+      
       <a-camera pos-rot-controller>
         <a-entity position="2 0 -20">
           <a-sphere
