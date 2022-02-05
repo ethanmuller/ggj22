@@ -291,9 +291,9 @@
         },
         tick: function () {
           const t = Date.now()/1000/4
-          const s = Math.sin(Date.now()/1000*2)
+          const s = Math.sin(Date.now()/1000*2)*4
           const s3 = Math.sin(Date.now()/1000*2/3)
-          const c = Math.cos(Date.now()/1000*4)
+          const c = Math.abs(Math.cos(Date.now()/1000*4)) * -1
           console.log(t,s,c)
           this.el.setAttribute("position", `${s*2} ${s3*2} ${c*10}`);
           mosquitoPan.setPosition(s*2, s3*2, c*10)
