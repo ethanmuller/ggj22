@@ -110,6 +110,7 @@
           release: 0,
         },
       }).chain(mosquitoPan, v);
+      mosquitoSynth.volume.value = 24
       
       
       // const lfo = new Tone.LFO(0.1, 470, 480).start()
@@ -201,7 +202,7 @@
       function releaseSkeeter(e) {
         skeetin = true;
         
-        mosquitoSynth.triggerAttack(480)
+        mosquitoSynth.triggerAttack(200)
         
         e.target.hidden = true;
         var utterance = new SpeechSynthesisUtterance('mosquito released');
@@ -291,9 +292,9 @@
         },
         tick: function () {
           const t = Date.now()/1000/4
-          const s = Math.sin(Date.now()/1000*2)*4
-          const s3 = Math.sin(Date.now()/1000*2/3)
-          const c = Math.abs(Math.cos(Date.now()/1000*4)) * -1
+          const s = Math.sin(Date.now()/1000*2)*10
+          const s3 = Math.cos(Date.now()/1000*2/3)*0
+          const c = Math.cos(Date.now()/1000*4)*10*-1
           console.log(t,s,c)
           this.el.setAttribute("position", `${s*2} ${s3*2} ${c*10}`);
           mosquitoPan.setPosition(s*2, s3*2, c*10)
