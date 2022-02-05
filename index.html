@@ -98,6 +98,8 @@
         envelope,
       });
 
+      
+      const v = new Tone.Vibrato (5, 0.5).toDestination()
       const mosquitoSynth = new Tone.Synth({
         oscillator: { type: "amsawtooth" },
         envelope: {
@@ -106,9 +108,9 @@
           sustain: 1,
           release: 0,
         },
-      });
+      }).connect(v);
       
-      const lfo = new Tone.LFO(2, 250, 600).start()
+      const lfo = new Tone.LFO(0.1, 400, 500).start()
       
       lfo.connect(mosquitoSynth.frequency)
 
@@ -116,7 +118,6 @@
 
       synth.connect(panner);
       buzzSynth.connect(panner);
-      mosquitoSynth.connect(panner);
 
       const synth2 = new Tone.Synth({
         oscillator: { type: "sine" },
