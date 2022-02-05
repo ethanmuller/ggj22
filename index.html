@@ -99,7 +99,7 @@
       });
 
       
-      const v = new Tone.Vibrato (5, 0.5).toDestination()
+      const v = new Tone.Vibrato (1, 0.1).toDestination()
       const mosquitoSynth = new Tone.Synth({
         oscillator: { type: "amsawtooth" },
         envelope: {
@@ -110,9 +110,8 @@
         },
       }).connect(v);
       
-      const lfo = new Tone.LFO(0.1, 400, 500).start()
-      
-      lfo.connect(mosquitoSynth.frequency)
+      // const lfo = new Tone.LFO(0.1, 470, 480).start()
+      // lfo.connect(mosquitoSynth.frequency)
 
       const panner = new Tone.Panner(0.5).toDestination();
 
@@ -202,7 +201,7 @@
         
         e.target.hidden = true;
         
-        mosquitoSynth.triggerAttack(250);
+        mosquitoSynth.triggerAttack(480);
         var utterance = new SpeechSynthesisUtterance('mosquito released');
         window.speechSynthesis.speak(utterance);
       }
@@ -389,6 +388,9 @@
           const rot = cameraEl.getAttribute("rotation");
 
           const thresh = 2;
+          
+          mosquitoSynth.frequency.value = 480 + rot.x*2
+          mosquitoSynth.volume = 480 + rot.x*2
 
           if (dir === -1) {
             if (rot.x < extreme) {
@@ -400,7 +402,6 @@
             }
           }
 
-          //if (!boopin) return;
           if (
             lastRotX > rot.x &&
             dir !== -1 &&
