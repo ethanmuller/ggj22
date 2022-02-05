@@ -373,7 +373,7 @@
         E: ${extreme}
         D: ${dir}
         Y: ${rot.x}
-        N: ${rot.y}
+        N: ${rot.y/Math.PI}
         R: ${bpm}BPM`
           );
 
@@ -389,8 +389,8 @@
 
           const thresh = 2;
           
-          mosquitoSynth.frequency.value = 480 + rot.x*2
-          mosquitoSynth.volume = 480 + rot.x*2
+//           mosquitoSynth.frequency.value = 480 + rot.x*2
+//           mosquitoSynth.volume.value = -rot.z
 
           if (dir === -1) {
             if (rot.x < extreme) {
