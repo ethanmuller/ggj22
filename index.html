@@ -63,6 +63,7 @@
       <div class="btn-wrapper">
         <button class="btn" id="boop">ACTIVATE PULSE</button>
         <button class="btn" id="skeeter">RELEASE MOSQUITO</button>
+        <button class="btn" id="makeBaby">MAKE BABY</button>
         <button class="btn" id="unboop" hidden="true">DEACTIVATE SOUND 🙅👂</button>
       </div>
     </header>
@@ -79,6 +80,7 @@
       let dir = 0;
       let boopin = false;
       let skeetin = false;
+      let babyMade = false;
       const baseBPM = 70;
       let bpm = baseBPM;
 
@@ -111,6 +113,9 @@
           release: 0,
         },
       }).chain(mosquitoPan, v);
+      
+      const babySample = new Tone.Player("https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/458646__jamesmbock__babycry.mp3?v=1644694952083").toDestination();
+      
       mosquitoSynth.volume.value = 24
       
       
@@ -209,6 +214,16 @@
         var utterance = new SpeechSynthesisUtterance('mosquito released');
         window.speechSynthesis.speak(utterance);
       }
+      
+      function makeBaby(e) {
+        babyMade = true;
+        
+        e.target.hidden = true;
+        
+        babySample.start()
+        var utterance = new SpeechSynthesisUtterance('baby made');
+        window.speechSynthesis.speak(utterance);
+      }
 
       function boop(e) {
         boopin = true;
@@ -225,6 +240,7 @@
 
       document.getElementById("boop").addEventListener("click", boop);
       document.getElementById("skeeter").addEventListener("click", releaseSkeeter);
+      document.getElementById("makeBaby").addEventListener("click", makeBaby);
       
 
       function ding() {
@@ -339,6 +355,13 @@
 
       AFRAME.registerComponent("baby-scale", {
         tick: function () {
+          if (babyMade) {
+            this.el.setAttribute('visible', true)
+          }
+          else {
+            this.el.setAttribute('visible', false)
+          }
+          
           var cameraEl = this.el.sceneEl.camera.el;
           const rot = cameraEl.getAttribute("rotation");
           this.el.setAttribute(
@@ -468,10 +491,10 @@
           src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby.gltf?v=1643391257144"
         ></a-asset-item>
       </a-assets>
-      <a-entity position="0 0 13">
+      <a-entity position="-13 0 0">
         <a-entity
           scale="0.04 0.04 0.04"
-          rotation="0 180 0"
+          rotation="0 90 0"
           gltf-model="#baby"
           baby-scale
         ></a-entity>
