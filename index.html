@@ -122,6 +122,12 @@
       babySample.playbackRate = 0.95
       babySample.loop = true
       
+      const ambience = new Tone.Noise('pink')
+      const ambienceFilter = new Tone.Filter({frequency: 400, type: 'lowpass', Q: 10}).toDestination()
+      ambience.connect(ambienceFilter)
+      ambience.volume.value = -10
+  
+      
       mosquitoSynth.volume.value = 24
       
       
@@ -229,6 +235,9 @@
         babySample.start()
         var utterance = new SpeechSynthesisUtterance('baby made');
         window.speechSynthesis.speak(utterance);
+        
+        
+        ambience.start()
       }
 
       function boop(e) {
@@ -374,9 +383,12 @@
           var cameraEl = this.el.sceneEl.camera.el;
           const rot = cameraEl.getAttribute("rotation");
           
-          babySample.playbackRate = Math.max(0.9 - Math.max(rot.x/90, 0), 0.1)
+          babySample.playbackRate = Math.max(0.9 - Math.max(rot.x/90, 0)*0.5, 0.1)
           babyverb.wet.value = 1
-          babyverb.decay.value = Math.max(rot.x/90, 0)/2*10
+          babyverb.decay.value = Math.max(rot.x/90, 0)/2*3
+          
+          ambienceFilter.frequency.value = 400 + Math.max(rot.x/90, 0) * 200
+
           
 
           
