@@ -220,7 +220,7 @@
       function releaseSkeeter(e) {
         skeetin = true;
         
-        mosquitoSynth.triggerAttack(200)
+        mosquitoSynth.triggerAttack(50)
         
         e.target.hidden = true;
         var utterance = new SpeechSynthesisUtterance('mosquito released');
@@ -235,8 +235,6 @@
         babySample.start()
         var utterance = new SpeechSynthesisUtterance('baby made');
         window.speechSynthesis.speak(utterance);
-        
-        
         ambience.start()
       }
 
