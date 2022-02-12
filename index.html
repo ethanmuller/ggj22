@@ -117,15 +117,15 @@
       
       
       const babyPan = new Tone.Panner3D(0, 0, 0).toDestination()
-      const babyverb = new Tone.Reverb({ decay: 8, wet: 1 }).connect(babyPan)
-      const babySample = new Tone.Player("https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/458646__jamesmbock__babycry.mp3?v=1644694952083").connect(babyverb)
+      const babyverb = new Tone.Reverb({ decay: 8, wet: 1 }).connect(bab)
+      const babySample = new Tone.Player("https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/458646__jamesmbock__babycry.mp3?v=1644694952083").connect(babyPan)
       babySample.playbackRate = 0.95
       babySample.loop = true
       
       const ambience = new Tone.Noise('pink')
       const ambienceFilter = new Tone.Filter({frequency: 400, type: 'lowpass', Q: 10}).toDestination()
       ambience.connect(ambienceFilter)
-      ambience.volume.value = -10
+      ambience.volume.value = -20
   
       
       mosquitoSynth.volume.value = 24
@@ -235,7 +235,7 @@
         babySample.start()
         var utterance = new SpeechSynthesisUtterance('baby made');
         window.speechSynthesis.speak(utterance);
-        ambience.start()
+        //ambience.start()
       }
 
       function boop(e) {
@@ -368,7 +368,7 @@
       AFRAME.registerComponent("baby-scale", {
         init: function () {
           
-          // babyPan.setPosition(-13, 0, 0)
+          babyPan.setPosition(-13, 0, 0)
         },
         tick: function () {
           if (babyMade) {
@@ -463,6 +463,10 @@
 
           const thresh = 2;
           
+          			Tone.Listener.forwardX.rampTo(Math.sin(rot.y), 0.2);
+			Tone.Listener.forwardY.value = 0;
+			Tone.Listener.forwardZ.rampTo(-Math.cos(rot.y), 0.2);
+          
 //           mosquitoSynth.frequency.value = 480 + rot.x*2
 //           mosquitoSynth.volume.value = -rot.z
 
@@ -517,10 +521,10 @@
           src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby.gltf?v=1643391257144"
         ></a-asset-item>
       </a-assets>
-      <a-entity position="0 0 -13">
+      <a-entity position="-13 0 0">
         <a-entity
           scale="0.04 0.04 0.04"
-          rotation="0 0 0"
+          rotation="0 90 0"
           gltf-model="#baby"
           baby-scale
         ></a-entity>
