@@ -114,7 +114,12 @@
         },
       }).chain(mosquitoPan, v);
       
-      const babySample = new Tone.Player("https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/458646__jamesmbock__babycry.mp3?v=1644694952083").toDestination();
+      
+      
+      const babyPan = new Tone.Panner3D(0, 0, 0).toDestination()
+      const babySample = new Tone.Player("https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/458646__jamesmbock__babycry.mp3?v=1644694952083").chain(babyPan)
+      babySample.playbackRate = 0.95
+      babySample.loop = true
       
       mosquitoSynth.volume.value = 24
       
@@ -319,7 +324,6 @@
           const x = Math.sin(t)*60
           const y = 0
           const z = Math.cos(t)*60 - 30
-          console.log(t,s,c)
           this.el.setAttribute("position", `${x} ${y} ${z}`);
           mosquitoPan.setPosition(x, y, z)
         },
@@ -354,6 +358,10 @@
       });
 
       AFRAME.registerComponent("baby-scale", {
+        init: function () {
+          
+          babyPan.setPosition(-13, 0, 0)
+        },
         tick: function () {
           if (babyMade) {
             this.el.setAttribute('visible', true)
