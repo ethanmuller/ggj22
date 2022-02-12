@@ -117,8 +117,9 @@
       
       
       const babyPan = new Tone.Panner3D(0, 0, 0).toDestination()
-      const babyverb = new Tone.Reverb({ decay: 8, wet: 1 }).connect(bab)
-      const babySample = new Tone.Player("https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/458646__jamesmbock__babycry.mp3?v=1644694952083").connect(babyPan)
+      const babyverb = new Tone.Reverb({ decay: 8, wet: 1 }).connect(babyPan)
+      const babySample = new Tone.Player("https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/458646__jamesmbock__babycry.mp3?v=1644694952083").connect(babyverb)
+      
       babySample.playbackRate = 0.95
       babySample.loop = true
       
@@ -328,7 +329,7 @@
             this.el.setAttribute('visible', false)
           }
           
-          const t = Date.now()/1000*8
+          const t = Date.now()/1000
           const x = Math.sin(t)*60
           const y = 0
           const z = Math.cos(t)*60 - 30
@@ -463,10 +464,9 @@
 
           const thresh = 2;
           
-          			Tone.Listener.forwardX.rampTo(Math.sin(rot.y), 0.2);
-			Tone.Listener.forwardY.value = 0;
-			Tone.Listener.forwardZ.rampTo(-Math.cos(rot.y), 0.2);
-          
+          Tone.Listener.value = Math.sin(rot.y)
+			    Tone.Listener.forwardY.value = 0;
+			    Tone.Listener.forwardZ.value = -Math.cos(rot.y)          
 //           mosquitoSynth.frequency.value = 480 + rot.x*2
 //           mosquitoSynth.volume.value = -rot.z
 
@@ -544,13 +544,15 @@
         position="3 2 5"
       ></a-entity>
       
-      <a-camera pos-rot-controller>
+      
         
       
           <a-sphere
                     position="0 0 -10"
                     synth
           ></a-sphere>
+      
+      <a-camera pos-rot-controller>
         <a-entity position="2 0 -20">
           <a-sphere
             color="#fff"
