@@ -117,7 +117,7 @@
       
       
       const babyPan = new Tone.Panner3D(0, 0, 0).toDestination()
-      const babyverb = new Tone.Reverb({ decay: 5, }).connect(babyPan)
+      const babyverb = new Tone.Reverb({ decay: 8, wet: 1 }).connect(babyPan)
       const babySample = new Tone.Player("https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/458646__jamesmbock__babycry.mp3?v=1644694952083").connect(babyverb)
       babySample.playbackRate = 0.95
       babySample.loop = true
@@ -374,7 +374,10 @@
           var cameraEl = this.el.sceneEl.camera.el;
           const rot = cameraEl.getAttribute("rotation");
           
-          babySample.playbackRate = 0.9 - Math.max(rot.x/90, 0.5)/2
+          babySample.playbackRate = Math.max(0.9 - Math.max(rot.x/90, 0), 0.1)
+          babyverb.wet.value = 1
+          babyverb.decay.value = Math.max(rot.x/90, 0)/2*10
+          
 
           
           this.el.setAttribute(
