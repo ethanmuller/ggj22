@@ -46,7 +46,7 @@
     
     
     <header>
-    <p>
+<!--     <p>
       instructions:
     </p>
     <ol>
@@ -59,10 +59,10 @@
       <p>
         warning: headphones required, but not bluetooth ones
       </p>
-    
+     -->
       <div class="btn-wrapper">
         <button class="btn" id="boop">ACTIVATE PULSE</button>
-        <button class="btn" id="skeeter">RELEASE MOSQUITO</button>
+        <button class="btn" id="skeeter">RELEASE DRONE</button>
         <button class="btn" id="makeBaby">MAKE BABY</button>
         <button class="btn" id="unboop" hidden="true">DEACTIVATE SOUND 🙅👂</button>
       </div>
@@ -225,7 +225,7 @@
         mosquitoSynth.triggerAttack(33.3334)
         
         e.target.hidden = true;
-        var utterance = new SpeechSynthesisUtterance('mosquito released');
+        var utterance = new SpeechSynthesisUtterance('drone released');
         window.speechSynthesis.speak(utterance);
       }
       
@@ -522,10 +522,10 @@
           src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby.gltf?v=1643391257144"
         ></a-asset-item>
       </a-assets>
-      <a-entity position="-13 0 0">
+      <a-entity position="0 0 8">
         <a-entity
           scale="0.04 0.04 0.04"
-          rotation="0 90 0"
+          rotation="0 180 0"
           gltf-model="#baby"
           baby-scale
         ></a-entity>
