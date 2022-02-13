@@ -333,7 +333,7 @@
           const t = Date.now()/1000
           const x = Math.sin(t)*60
           const y = 0
-          const z = Math.cos(t)*60 - 30
+          const z = Math.cos(t)*60*10 - 30
           this.el.setAttribute("position", `${x} ${y} ${z}`);
           mosquitoPan.setPosition(x, y, z)
         },
@@ -522,10 +522,10 @@
           src="https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/Baby.gltf?v=1643391257144"
         ></a-asset-item>
       </a-assets>
-      <a-entity position="0 0 8">
+      <a-entity position="0 0 -8">
         <a-entity
           scale="0.04 0.04 0.04"
-          rotation="0 180 0"
+          rotation="0 0 0"
           gltf-model="#baby"
           baby-scale
         ></a-entity>
