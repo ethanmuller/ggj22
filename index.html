@@ -115,7 +115,8 @@
         },
       }).chain(mosquitoPan, mosquitoFilter, v);
       
-      
+      const badVibes = new Tone.Player("https://cdn.glitch.global/03887c56-95e5-4d29-9613-e4d25b39c890/sil-bad-vibes.wav?v=1644715536250").toDestination()
+
       
       const babyPan = new Tone.Panner3D(0, 0, 0).toDestination()
       const babyverb = new Tone.Reverb({ decay: 8, wet: 1 }).connect(babyPan)
@@ -235,6 +236,7 @@
         e.target.hidden = true;
         
         babySample.start()
+        badVibes.start()
         var utterance = new SpeechSynthesisUtterance('baby made');
         window.speechSynthesis.speak(utterance);
         //ambience.start()
