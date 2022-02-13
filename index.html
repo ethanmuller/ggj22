@@ -104,6 +104,7 @@
       const v = new Tone.Vibrato (0.5, 0.8).toDestination()
       
       const mosquitoPan = new Tone.Panner3D(0, 0, 0)
+      const mosquitoFilter = new Tone.Filter(500, "lowpass")
       const mosquitoSynth = new Tone.Synth({
         oscillator: { type: "amsawtooth" },
         envelope: {
@@ -112,7 +113,7 @@
           sustain: 1,
           release: 0,
         },
-      }).chain(mosquitoPan, v);
+      }).chain(mosquitoPan, mosquitoFilter, v);
       
       
       
@@ -221,7 +222,7 @@
       function releaseSkeeter(e) {
         skeetin = true;
         
-        mosquitoSynth.triggerAttack(50)
+        mosquitoSynth.triggerAttack(33.3334)
         
         e.target.hidden = true;
         var utterance = new SpeechSynthesisUtterance('mosquito released');
@@ -464,9 +465,9 @@
 
           const thresh = 2;
           
-          Tone.Listener.value = Math.sin(rot.y)
-			    Tone.Listener.forwardY.value = 0;
-			    Tone.Listener.forwardZ.value = -Math.cos(rot.y)          
+			    // Tone.Listener.value = Math.sin(rot.y)
+			    // Tone.Listener.forwardY.value = 0;
+			    // Tone.Listener.forwardZ.value = -Math.cos(rot.y)          
 //           mosquitoSynth.frequency.value = 480 + rot.x*2
 //           mosquitoSynth.volume.value = -rot.z
 
@@ -547,12 +548,13 @@
       
         
       
+      
+      <a-camera pos-rot-controller>
+        
           <a-sphere
                     position="0 0 -10"
                     synth
           ></a-sphere>
-      
-      <a-camera pos-rot-controller>
         <a-entity position="2 0 -20">
           <a-sphere
             color="#fff"
