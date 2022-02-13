@@ -331,9 +331,9 @@
           }
           
           const t = Date.now()/1000
-          const x = Math.sin(t)*60
+          const x = Math.sin(t)*60*0.5
           const y = 0
-          const z = Math.cos(t)*60*10 - 30
+          const z = Math.cos(t)*60*6 - 30
           this.el.setAttribute("position", `${x} ${y} ${z}`);
           mosquitoPan.setPosition(x, y, z)
         },
